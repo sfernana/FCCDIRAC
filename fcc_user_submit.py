@@ -37,7 +37,7 @@ fcc.append(fcc_physics)
 #---------------FCCSW---------------------------------#
 fccsw = Application()
 
-fccsw_path = '/build/sfernana/FCC/FCCSW'
+
 #fccsw_path = '/build/<YOUR_USERNAME>/FCC/FCCSW'
 
 #we test these 2 configurations succesfully
@@ -58,7 +58,6 @@ fccsw.set_configuration_file(conf_file)
 fccsw.set_fccsw_path(fccsw_path)
 
 #example of how to add 'extra' files or folders
-#fccsw.add_paths(['/afs/cern.ch/user/s/sfernana/job3.sub','/afs/cern.ch/user/s/sfernana/OutDir'])
 #fccsw.add_paths(['/afs/cern.ch/user/<YOUR_INITIAL>/<YOUR_USERNAME>/foo.bar','/afs/cern.ch/user/<YOUR_INITIAL>/<YOUR_USERNAME>/HelloWorld'])
 
 fcc.append(fccsw)
