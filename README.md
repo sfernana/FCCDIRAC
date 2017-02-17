@@ -111,11 +111,11 @@ Second, to be able to submit jobs through DIRAC interware, you need :
 
 Instructions for these 2 primordial steps can be found here :
 
-- https://twiki.cern.ch/twiki/bin/view/LHCb/FAQ/Certificate
+- [LHCB tutorial](https://twiki.cern.ch/twiki/bin/view/LHCb/FAQ/Certificate)
 
 or here :
 
-- https://twiki.cern.ch/twiki/bin/view/CLIC/IlcdiracRegistration
+- [CLIC tutorial](https://twiki.cern.ch/twiki/bin/view/CLIC/IlcdiracRegistration)
 
 
 Actually, FCC group does not have its own VO. After Discussion with CLIC people, they authorized some FCC people to join their VO, for which we are very grateful.
@@ -127,11 +127,11 @@ So, in the next section, the instuctions of the installation are specifc to ILC 
 If you encounter some problems with the DIRAC installation, very good tutorials are also available here :
 
 
-https://github.com/DIRACGrid/DIRAC/wiki/DIRAC-Tutorials
+[DIRACGrid tutorial](https://github.com/DIRACGrid/DIRAC/wiki/DIRAC-Tutorials)
 
 or here :
 
-http://lcd-data.web.cern.ch/lcd-data/doc/HeadFirstTalk.pdf
+[LCD tutorial](http://lcd-data.web.cern.ch/lcd-data/doc/HeadFirstTalk.pdf)
 
 
 ### []() 2 - Setting up ILCDIRAC environment
@@ -156,7 +156,7 @@ Here are the minimum requirements if you want to continue this tutorial :
 
 If you are a CERN user, ILCDIRAC is already installed on AFS, you can follow the instructions here :
 
-https://twiki.cern.ch/twiki/bin/view/CLIC/IlcdiracEnvironment#Installing_ILCDIRAC
+[CLIC twiki tutorial](https://twiki.cern.ch/twiki/bin/view/CLIC/IlcdiracEnvironment#Installing_ILCDIRAC)
 
 Indeed, you only have to source a script and configure DIRAC using a proxy and your grid certificate.
 
@@ -211,7 +211,7 @@ If you are affiliated with a VO different from ILC, please refer to your VO DIRA
 
 mkdir -p $HOME/DIRAC/workspace
 cd  $HOME/DIRAC/workspace
-git clone github....
+git clone https://github.com/sfernana/FCCDIRAC.git
 cd FCCDIRAC
 ./fcc_user_submit.py
 
@@ -223,7 +223,7 @@ cd FCCDIRAC
 []() Examples
 -------------
 
-Through the script ./fcc_user_submit.py, we provide you a complete example of how to run FCC jobs on the grid.
+Through the script [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/master/fcc_user_submit.py), we provide you a complete example of how to run FCC jobs on the grid.
 
 Let's go step by step with 2 examples.
 
@@ -361,7 +361,7 @@ If necessary, change it to make it point to your real FCCSW location.
 []() Results
 ------------
 
-After you called the script ./fcc_user_submit, you have to confirm the submission to DIRAC and get a display similar to this one :
+After you called the script [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/master/fcc_user_submit.py), you have to confirm the submission to DIRAC and get a display similar to this one :
 
 ![Texte alternatif](https://github.com/sfernana/FCCDIRAC/blob/master/tutorial_images/diracsub.png "submission confirmation")
 
