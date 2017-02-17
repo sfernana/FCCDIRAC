@@ -38,7 +38,7 @@ fcc.append(fcc_physics)
 fccsw = Application()
 
 
-#fccsw_path = '/build/<YOUR_USERNAME>/FCC/FCCSW'
+fccsw_path = '/build/<YOUR_USERNAME>/FCC/FCCSW'
 
 #we test these 2 configurations succesfully
 #conf_file = os.path.join(fccsw_path,'Examples/options/geant_pgun_fullsim.py')
