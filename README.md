@@ -89,7 +89,7 @@ all this thanks to the GRID infrastructure and Abstraction layer built by DIRAC.
 
 ### []() b - Workflow
 
-![Texte alternatif](https://github.com/sfernana/FCCDIRAC/blob/master/dag.png "workflow")
+![Texte alternatif](https://github.com/sfernana/FCCDIRAC/blob/master/tutorial_images/dag.png "workflow")
 
 
 
@@ -363,7 +363,7 @@ If necessary, change it to make it point to your real FCCSW location.
 
 After you called the script ./fcc_user_submit, you have to confirm the submission to DIRAC and get a display similar to this one :
 
-![Texte alternatif](https://github.com/sfernana/FCCDIRAC/blob/master/diracsub.png "submission confirmation")
+![Texte alternatif](https://github.com/sfernana/FCCDIRAC/blob/master/tutorial_images/diracsub.png "submission confirmation")
 
 
 ### []() 1 - Command Line Interface
@@ -392,12 +392,12 @@ https://ilcdirac.cern.ch/DIRAC/?view=tabs&theme=Grey&url_state=1|*DIRAC.FileCata
 
 On the left side, click on 'Job Monitor' :
 
-![Texte alternatif](https://github.com/sfernana/FCCDIRAC/blob/master/jobmonitor.png "job monitoring")
+![Texte alternatif](https://github.com/sfernana/FCCDIRAC/blob/master/tutorial_images/jobmonitor.png "job monitoring")
 
 
 On the right side, click on 'refresh' :
 
-![Texte alternatif](https://github.com/sfernana/FCCDIRAC/blob/master/refresh.png "job status")
+![Texte alternatif](https://github.com/sfernana/FCCDIRAC/blob/master/tutorial_images/refresh.png "job status")
 
 
 Congratulations !!!
