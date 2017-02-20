@@ -9,7 +9,7 @@ Contents:
       * [a - Grid philosophy](#a---grid-philosophy)
       * [b - DIRAC](#b---dirac)
     * [2 - FCCDIRAC](#2---fccdirac)
-      * [a - Objective of this repository](#a---objective-of-this-repositorys)
+      * [a - Objective of this repository](#a---objective-of-this-repository)
       * [b - Workflow](#b---workflow)
     * [3 - Prerequisites](#3---prerequisites)
       * [a - GRID access](#a---grid-access)
@@ -154,7 +154,7 @@ Here are the minimum requirements if you want to continue this tutorial :
 
 So, as you understand, DIRAC works in client-server architecture.
 
-ILCDIRAC servers are running somewhere while users submit their job through a client which relay data to the servers.
+ILCDIRAC servers are running somewhere while users submit their jobs through a client which relay data to the servers.
 
 So, in order to submit jobs through ILCDIRAC, you need to get the ILCDIRAC client.
 
@@ -174,7 +174,7 @@ This client is composed of a set of commands that allow you to manage your jobs 
 
 ILCDIRAC client required your certificate in a specific format, you need to convert your GRID certificate from p12 format (as you exported it from your browser) to PEM format.
 
-But don't worry, the client already has a tool for that :D (8th line of the bash script below).
+But don't worry, the client has already a tool for that :D (8th line of the bash script below).
 
 It will store your converted certificate to your **.globus** directory.
 
@@ -208,7 +208,7 @@ The file **defaults-ILCDIRAC.cfg** is specific to ILC and it is a configuration 
 
 Each VO using DIRAC should have such a file which helps their users to configure DIRAC client quickly.
 
-If you are affiliated with a VO different from ILC, please refer to your VO DIRAC website or contact your VO administrator.
+If you are affiliated with a VO different from ILC, please refer to your VO DIRAC website or contact your VO administrator to get this files.
  
 
 
@@ -232,11 +232,11 @@ cd FCCDIRAC
 ## 5 - Examples
 
 
-Through the script [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/master/fcc_user_submit.py), we provide you a complete example of how to run FCC jobs on the grid.
+Through the script [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/master/fcc_user_submit.py), we provide you a complete example of how to run FCC jobs on the Grid.
 
 Let's go step by step with 2 examples.
 
-Through the 2 following examples, the user has to consider that there exist FCC jobs that may contain one or more applications.
+With the 2 following examples, the user has to consider that there exist FCC jobs that may contain one or more applications.
 
 
 ### a - Simple FCC Job
@@ -363,7 +363,7 @@ fcc.submit()
 
 ```
 
-In this example, we supposed that FCCSW folder is located at /build/<YOUR_USERNAME>/FCC.
+In this example, we supposed that FCCSW folder is located at **/build/<YOUR_USERNAME>/FCC**.
 If necessary, change it to make it point to your real FCCSW location.
  
 
