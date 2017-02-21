@@ -88,7 +88,7 @@ all this thanks to the GRID infrastructure and Abstraction layer built by DIRAC.
 
 ### b - Workflow
 
-![IMAGE NOT AVAILABLE](https://github.com/sfernana/FCCDIRAC/blob/master/tutorial_images/dag.png "workflow")
+![IMAGE NOT AVAILABLE](tutorial_images/dag.png "workflow")
 
 
 
@@ -372,8 +372,14 @@ If necessary, change it to make it point to your real FCCSW location.
 
 After you called the script [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/master/fcc_user_submit.py), you have to confirm the submission to DIRAC and get a display similar to this one :
 
-![IMAGE NOT AVAILABLE](https://github.com/sfernana/FCCDIRAC/blob/master/tutorial_images/diracsub.png "submission confirmation")
+![IMAGE NOT AVAILABLE](tutorial_images/diracsub.png "submission confirmation")
 
+
+
+WARNING : Your results are not getting back to your submitted working directory when the job finished, they are stored :
+	
+-	in the DIRAC database if results are smaller than 10 MO
+-	in the DIRAC catalog file if results are bigger than 10 MO
 
 ### a - Command Line Interface
 
@@ -401,12 +407,12 @@ https://ilcdirac.cern.ch/DIRAC/?view=tabs&theme=Grey&url_state=1|*DIRAC.FileCata
 
 On the left side, click on 'Job Monitor' :
 
-![IMAGE NOT AVAILABLE](https://github.com/sfernana/FCCDIRAC/blob/master/tutorial_images/jobmonitor.png "job monitoring")
+![IMAGE NOT AVAILABLE](tutorial_images/jobmonitor.png "job monitoring")
 
 
 On the right side, click on 'refresh' :
 
-![IMAGE NOT AVAILABLE](https://github.com/sfernana/FCCDIRAC/blob/master/tutorial_images/refresh.png "job status")
+![IMAGE NOT AVAILABLE](tutorial_images/refresh.png "job status")
 
 
 Congratulations !!!
