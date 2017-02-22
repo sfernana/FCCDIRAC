@@ -378,8 +378,8 @@ After you called the script [fcc_user_submit.py](https://github.com/sfernana/FCC
 
 WARNING : Your results are not getting back to your submitted working directory when the job finish, they are stored :
 	
--	in the DIRAC database if results are smaller than 10 MO
--	in the DIRAC catalog file if results are bigger than 10 MO
+-	in the DIRAC database if results are smaller than 10 Mb
+-	in the DIRAC catalog file if results are bigger than 10 Mb
 
 The same politic is applied for the inputs data.
 
