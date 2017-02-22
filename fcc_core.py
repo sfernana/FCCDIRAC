@@ -78,7 +78,7 @@ class Application():
         self.job_specification['fcc_executable'] = ''   
         self.job_specification['fcc_conf_file'] = ''
            
-        #mot mandatory 
+        #not mandatory 
         self.job_specification['fcc_output_file'] = ''
         self.job_specification['fcc_input_files']  = ''
         self.job_specification['number_of_events']  = ''
