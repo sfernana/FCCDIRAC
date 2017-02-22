@@ -134,9 +134,9 @@ or here :
 
 ### b - Setting up ILCDIRAC environment
 
-IlcDirac is  an  extension  of  the DIRAC framework, it is  built  on  top  of  the  workflow  API  from Dirac. 
+ILCDIRAC is  an  extension  of  the DIRAC framework, it is  built  on  top  of  the  workflow  API  from Dirac. 
 
-ILCDirac offers a set of applications used  in  the  LC  community and there 14  that are  currently  supported  natively by ILCDirac. 
+ILCDIRAC offers a set of applications used  in  the  LC  community and 14 applications are  currently  supported  natively by ILCDIRAC. 
 
 Among  them  are  :
 
@@ -154,9 +154,9 @@ Here are the minimum requirements if you want to continue this tutorial :
 
 So, as you understand, DIRAC works in client-server architecture.
 
-ILCDIRAC servers are running somewhere while users submit their jobs through a client which relay data to the servers.
+ILCDIRAC servers are running somewhere while users submit their jobs through a local client which relays data to the servers.
 
-So, in order to submit jobs through ILCDIRAC, you need to get the ILCDIRAC client.
+So, in order to submit jobs with ILCDIRAC, you need first to get the ILCDIRAC client.
 
 If you are a CERN user, ILCDIRAC client is already installed on AFS, you can follow the instructions here :
 
@@ -172,7 +172,7 @@ Installation scripts (e.g. **ilcdirac-install.sh**) and cfg files (e.g. **defaul
 
 This client is composed of a set of commands that allow you to manage your jobs as well as your data.
 
-ILCDIRAC client required your certificate in a specific format, you need to convert your GRID certificate from p12 format (as you exported it from your browser) to PEM format.
+ILCDIRAC client requires your certificate in a specific format, you need to convert your GRID certificate from p12 format (as you exported it from your browser) to PEM format.
 
 But don't worry, the client has already a tool for that :D (8th line of the bash script below).
 
@@ -288,7 +288,7 @@ fcc.submit()
 ### b - Complex FCC Job
 
 
-Now, let us complicate things in adding a new application at our job that is the famous **FCCSW**.
+Now, let us complicate things in adding a new application to our job, the famous **FCCSW** !
 
 
 ```
@@ -363,7 +363,7 @@ fcc.submit()
 
 ```
 
-In this example, we supposed that FCCSW folder is located at **/build/<YOUR_USERNAME>/FCC**.
+In this example, we supposed that FCCSW folder is located at **/build/&lt;YOUR_USERNAME&gt;/FCC**.
 If necessary, change it to make it point to your real FCCSW location.
  
 
@@ -376,10 +376,12 @@ After you called the script [fcc_user_submit.py](https://github.com/sfernana/FCC
 
 
 
-WARNING : Your results are not getting back to your submitted working directory when the job finished, they are stored :
+WARNING : Your results are not getting back to your submitted working directory when the job finish, they are stored :
 	
 -	in the DIRAC database if results are smaller than 10 MO
 -	in the DIRAC catalog file if results are bigger than 10 MO
+
+The same politic is applied for the inputs data.
 
 ### a - Command Line Interface
 
@@ -414,6 +416,7 @@ On the right side, click on 'refresh' :
 
 ![IMAGE NOT AVAILABLE](tutorial_images/refresh.png "job status")
 
+By right-clicking on the job id, you can download logs, inputs and outputs data.
 
 Congratulations !!!
 
