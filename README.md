@@ -395,7 +395,7 @@ Because you can set version for each application, we set by default, the version
 
 So if the current release of FCCSW is different, release manager should have already updated **dirac.cfg** of CVMFS/AFS DIRAC installation.
 
-***BUT YOU STILL HAVE TO SET THE VERSION OF THE APPLICATION LIKE THIS :***
+**BUT YOU STILL HAVE TO SET THE VERSION OF THE APPLICATION LIKE THIS :**
 
 my_application.setVersion("vX.X.X")
 
