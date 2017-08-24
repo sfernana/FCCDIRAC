@@ -1,67 +1,79 @@
 #!/bin/env python
 
-#************************** libraries importation **************************#
+"""This module aims to propose an example for using FCCDIRAC"""
 
-#user libraries
-#importations of fcc core classes
-from fcc_core import *
-
-#standard libraries
 import os
 
-        
-#1st FCC job
-fcc = Job()
+# It prints DIRAC environment script path available on AFS/CVMFS
+# If you have installed the DIRAC client
+# environment script must be here : ~/dirac/bashrc
 
-#we specify the source we script
-#for now the same for each job
-fcc.set_sourcing_script(os.path.join(os.getcwd(), "init_fcc.sh"))
+def _initDirac():
+  """This function checks DIRAC environment."""
 
-#1st application of the 1st FCC job
+  diracEnvMessage = (
+    "\nDIRAC environment :\n"
+    "Please ensure that you set up correctly DIRAC environment e.g. :\n"
+    "source /afs/cern.ch/eng/clic/software/DIRAC/bashrc\n"
+  )
+  # DIRAC environment
+  try:
+    os.environ["DIRAC"]
+  except KeyError:
+    # Print AFS path of environment script as 'help'
+    print(diracEnvMessage)
+    quit()
 
-#---------------FCC PHYSICS---------------------------------#
-fcc_physics = Application()
+_initDirac()
 
+# After DIRAC environment checking done, we can import DIRAC libraries
 
-fcc_physics.set_executable('fcc-pythia8-generate')
-fcc_physics.set_configuration_file('/cvmfs/fcc.cern.ch/sw/0.7/fcc-physics/0.1/x86_64-slc6-gcc49-opt/share/ee_ZH_Zmumu_Hbb.txt')
+from DIRAC.Core.Base import Script
+Script.parseCommandLine()
 
-#we add the application to the job
-fcc.append(fcc_physics)
+from ILCDIRAC.Interfaces.API.DiracILC import DiracILC
+from ILCDIRAC.Interfaces.API.NewInterface.UserJob import UserJob
+from ILCDIRAC.Interfaces.API.NewInterface.Applications import FccSw, FccAnalysis
 
+ILC = DiracILC()
 
+# job settings for a user job
+job = UserJob()
+job.setJobGroup("FCC")
+job.setName("Fcc Chain")
+job.setPlatform('x86_64-slc5-gcc43-opt')
+# e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
+job.setLogLevel('DEBUG')
 
+job.setOutputSandbox(["*.log","*.root"])
 
-#2nd application of the 1st FCC job
+#1st FCC application
+FCC_SW = FccSw(
+    fccConfFile='/build/YOUR_USERNAME/FCC/FCCSW/Examples/options/geant_pgun_fullsim.py',
+    fccSwPath='/build/YOUR_USERNAME/FCC/FCCSW',
+)
 
-#---------------FCCSW---------------------------------#
-fccsw = Application()
+FCC_SW.logLevel = 'DEBUG'
+#FCC_SW.numberOfEvents = 2
+#FCC_SW.setOutputFile("output.root")
 
+#2nd FCC application
+FCC_PHYSICS1 = FccAnalysis(
+    fccConfFile='/cvmfs/fcc.cern.ch/sw/0.8.1/fcc-physics/0.2.1/x86_64-slc6-gcc62-opt/share/ee_ZH_Zmumu_Hbb.txt'
+)
 
-fccsw_path = '/build/<YOUR_USERNAME>/FCC/FCCSW'
+#3rd FCC application
+FCC_PHYSICS2 = FccAnalysis(
+    executable='fcc-physics-read'
+)
 
-#we test these 2 configurations succesfully
-#conf_file = os.path.join(fccsw_path,'Examples/options/geant_pgun_fullsim.py')
-conf_file = os.path.join(fccsw_path,'Examples/options/simple_pythia.py')
+FCC_PHYSICS2.getInputFromApp(FCC_PHYSICS1)
 
-#stuff to call gaudirun.py
-python = '/cvmfs/lhcb.cern.ch/lib/lcg/releases/LCG_83/Python/2.7.9.p1/x86_64-slc6-gcc49-opt/bin/python2.7'
-xenv = '/cvmfs/lhcb.cern.ch/lib/lhcb/LBSCRIPTS/LBSCRIPTS_v8r5p3/LbUtils/cmake/xenv'
-arg_xenv  = 'InstallArea/FCCSW.xenv'
-exe = 'gaudirun.py'
+#applications appending ...
+job.append(FCC_PHYSICS1)
+job.append(FCC_PHYSICS2)
+job.append(FCC_SW)
 
+job.setOutputData(['ee_ZH_Zmumu_Hbb.root', 'output.root'] )
 
-fccsw.set_executable('exec ' + python + ' ' + xenv + ' ' + arg_xenv + ' ' + exe)
-fccsw.set_configuration_file(conf_file)
-
-
-fccsw.set_fccsw_path(fccsw_path)
-
-#example of how to add 'extra' files or folders
-#fccsw.add_paths(['/afs/cern.ch/user/<YOUR_INITIAL>/<YOUR_USERNAME>/foo.bar','/afs/cern.ch/user/<YOUR_INITIAL>/<YOUR_USERNAME>/HelloWorld'])
-
-fcc.append(fccsw)
-
-#finally, we can submit the 1st FCC job containing 2 applications in this case
-fcc.submit()
-
+job.submit(ILC,mode='wms')
