@@ -373,6 +373,66 @@ Notice that these examples are submitting to the grid, you can also submit to yo
 
 	job.submit(ILC,mode='local')
 
+**WARNING**
+
+Applications are setting environment by asking the following configuration file :
+
+- DIRAC_INSTALLATION/etc/dirac.cfg
+
+It contains sections where the path of the environment script is hardcoded.
+
+Each application is looking for this file for setting the environment.
+
+If your are using CVMFS/AFS DIRAC installation, it contains already FCC environment script.
+
+If your are not using CVMFS/AFS DIRAC installation, then ensure that this file contains FCC environment else
+
+applications won't run.
+
+For each new release, the release manager has to update this file of the CVMFS/AFS DIRAC installation by contacting CLIC group.
+
+Because you can set version for each application, we set by default, the version **v0.8.1**.
+
+So if the current release of FCCSW is different, release manager should have already updated **dirac.cfg** of CVMFS/AFS DIRAC installation.
+
+***BUT YOU STILL HAVE TO SET THE VERSION OF THE APPLICATION LIKE THIS :***
+
+my_application.setVersion("vX.X.X")
+
+
+```
+Operations
+{
+    Defaults
+    {
+        AvailableTarBalls
+        {
+            x86_64-slc5-gcc43-opt
+            {       
+                 fccanalysis
+                 {
+                      v0.8.1
+	              {
+	     	          CVMFSEnvScript = /cvmfs/fcc.cern.ch/sw/0.8.1/init_fcc_stack.sh
+	                  CVMFSPath = /cvmfs/fcc.cern.ch/sw/0.8.1
+         	      }
+         	 }
+         	 fccsw
+		 {
+		     v0.8.1
+		     {
+		         CVMFSEnvScript = /cvmfs/fcc.cern.ch/sw/0.8.1/init_fcc_stack.sh
+		         CVMFSPath = /cvmfs/fcc.cern.ch/sw/0.8.1
+		     }
+		 }
+         
+            } 
+        }
+    }
+}
+
+```
+
 
 ## 5 - Sandboxes and Data
 
@@ -415,7 +475,9 @@ How to set the output sandbox :
 
 Notice that you can also specify a list for the output files.
 
-WARNING : Your results are not getting back to your local machine when the job is finished, they are stored :
+**WARNING**
+
+Your results are not getting back to your local machine when the job is finished, they are stored :
 	
 -	in the DIRAC database if results are smaller than 10 Mb
 -	in the DIRAC File Catalog if results are bigger than 10 Mb
