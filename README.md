@@ -17,14 +17,14 @@ Contents:
     * [4 - Examples](#4---examples)
       * [a - Simple FCC job](#a---simple-fcc-job)
       * [b - Complex FCC Job](#b---complex-fcc-job)
-    * [5 - Sandboxes & Data](#5---sandboxes-&-data)
+    * [5 - Sandboxes and Data](#5---sandboxes-and-data)
       * [a - Sandboxes](#a---sandboxes)
-      * [b - Output Data](#a---input-data)
-      * [c - Input Data](#b---output-data)
+      * [b - Output Data](#a---output-data)
+      * [c - Input Data](#b---input-data)
     * [6 - Monitoring](#6---monitoring)
       * [a - Command Line Interface](#a---command-line-interface)
       * [b - Web Portal](#b---web-portal)
-    * [7 - Advanced](#6---advanced)
+    * [7 - Advanced](#7---advanced)
       *	[a - Job splitting](#a---job-splitting)
       * [b - FCC integration](#b---fcc-integration)
       * [c - HTCondor submission with dirac](#c---htcondor-submission-with-dirac)
@@ -97,7 +97,7 @@ Thanks to this new concept, you can specify a job like a chain of applications o
 
 It is also possible to have dependency between each step.
 
-### a - Application
+### b - Application
 
 VOs have created many applications in their DIRAC instance with a specific purpose :
 
@@ -374,7 +374,7 @@ Notice that these examples are submitting to the grid, you can also submit to yo
 	job.submit(ILC,mode='local')
 
 
-## 5 - Sandboxes & Data
+## 5 - Sandboxes and Data
 
 
 On the worker node (the machine executing the job), results should be organised like this :
@@ -481,7 +481,7 @@ Notice that data can have replicas in different sites.
 
 ## 6 - Monitoring
 
-### a - CLI
+### a - Command Line Interface
 
 
 How to check your job status :
