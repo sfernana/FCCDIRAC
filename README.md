@@ -18,8 +18,9 @@ Contents:
       * [a - Simple FCC job](#a---simple-fcc-job)
       * [b - Complex FCC Job](#b---complex-fcc-job)
     * [5 - Sandboxes & Data](#5---data)
-      * [a - Output Data](#a---input-data)
-      * [b - Input Data](#b---output-data)
+      * [a - Sandboxes](#a---sandboxes)
+      * [b - Output Data](#a---input-data)
+      * [c - Input Data](#b---output-data)
     * [6 - Monitoring](#6---monitoring)
       * [a - Command Line Interface](#a---command-line-interface)
       * [b - Web Portal](#b---web-portal)
@@ -419,9 +420,7 @@ WARNING : Your results are not getting back to your local machine when the job i
 
 You have to use a specific command if you want to download the output sandbox (see [Monitoring section](#6---monitoring)).
 
-### b - Data
-
-### a - Output Data
+### b - Output Data
 
 
 Files **produced** by the job are known as **Output Data** that can be specified like this :
@@ -466,7 +465,7 @@ So once the FCC VO will be created (if it is not yet the case), these physical l
 
 **Resources/StorageElements** section of the **dirac.cfg** file used by the DIRAC configuration service on the server.
 
-### b - Input Data
+### c - Input Data
 
 Files **consumed** by the job are known as **Input Data** that can specified like this :
 
