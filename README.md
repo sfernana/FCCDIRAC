@@ -27,7 +27,7 @@ Contents:
     * [7 - Advanced](#7---advanced)
       *	[a - Job splitting](#a---job-splitting)
       * [b - FCC integration](#b---fcc-integration)
-      * [c - HTCondor submission with dirac](#c---htcondor-submission-with-dirac)
+      * [c - HTCondor submission with DIRAC](#c---htcondor-submission-with-dirac)
 	
 
 
@@ -146,7 +146,7 @@ or here :
 Because FCC group collaborate with CLIC group, new FCC users have to register to the CLIC VO.
 
 
-So, in the next section, the instuctions of the client installation are specific to the CLIC VO.
+So, in the next section, the instructions of the client installation are specific to the CLIC VO.
 
 
 If you encounter some problems with the client installation, very good tutorials are also available here :
@@ -211,7 +211,7 @@ It will store your converted certificate to your **.globus** directory.
 
 Here are the instructions of how to install ILCDIRAC client and configure it with your GRID certificate (even the certificate conversion is included, no need to make it before):
 
-If you want to use the pre existing installation and skip step 1, execute step 22 instead of step 2.
+If you want to use the pre existing installation skip step 1 and execute step 22 instead of step 2.
 
 
 ```
