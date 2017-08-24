@@ -427,7 +427,7 @@ You have to use a specific command if you want to download the output sandbox (s
 
 Files **produced** by the job are known as **Output Data** that can be specified like this :
 
-	job.setOutputData(lfns = "my_root_file.root", OutputPath = "Simulation", OuptutSE = "CERN-DST-EOS")
+	job.setOutputData(lfns = "my_root_file.root", OutputPath = "Simulation", OutputSE = "CERN-DST-EOS")
 
 Notice that you can also specify a list for the output data.
 
