@@ -433,6 +433,7 @@ Operations
 
 ```
 
+Do not take care of the platform here **x86_64-slc5-gcc43-opt** because software will be taken from CVMFS with the platform specified in the environment script.
 
 ## 5 - Sandboxes and Data
 
