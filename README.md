@@ -17,7 +17,7 @@ Contents:
     * [4 - Examples](#4---examples)
       * [a - Simple FCC job](#a---simple-fcc-job)
       * [b - Complex FCC Job](#b---complex-fcc-job)
-    * [5 - Sandboxes & Data](#5---sandboxes-and-data)
+    * [5 - Sandboxes & Data](#5---sandboxes-&-data)
       * [a - Sandboxes](#a---sandboxes)
       * [b - Output Data](#a---input-data)
       * [c - Input Data](#b---output-data)
