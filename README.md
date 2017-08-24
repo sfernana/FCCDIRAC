@@ -625,6 +625,8 @@ How to send a set of input data per job :
 
 	job.setSplitInputData(['/ilc/user/u/username/data1.root','/ilc/user/u/username/data2.root','/ilc/user/u/username/data3.root'], NUMBER_OF_DATA_PER_JOB)
 
+When splitting is used, the seed is set differently for each job, it is equal to the ID of the job which supposed to be unique.
+
 The setting of the event and the seed is automatically set by :
 
 - appending another configuration file to GAUDI for FccSw (for the seed, the default random generator used is : **HepRndm::Engine&lt;CLHEP::RanluxEngine&gt;**)
