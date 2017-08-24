@@ -19,8 +19,8 @@ Contents:
       * [b - Complex FCC Job](#b---complex-fcc-job)
     * [5 - Sandboxes and Data](#5---sandboxes-and-data)
       * [a - Sandboxes](#a---sandboxes)
-      * [b - Output Data](#a---output-data)
-      * [c - Input Data](#b---input-data)
+      * [b - Output Data](#b---output-data)
+      * [c - Input Data](#c---input-data)
     * [6 - Monitoring](#6---monitoring)
       * [a - Command Line Interface](#a---command-line-interface)
       * [b - Web Portal](#b---web-portal)
@@ -363,7 +363,7 @@ job.submit(ILC,mode='wms')
 
 ```
 
-We provided you a more complete example here [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/master/fcc_user_submit.py).
+We provided you a more complete example here [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/fcc_apps_inside_ilc/fcc_user_submit.py).
 
 You should get a display similar to this one :
 
