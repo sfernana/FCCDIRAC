@@ -432,11 +432,13 @@ Operations
 
 ```
 
+So if the version is different from **v0.8.1**, check if the **dirac.cfg** file is up to date and
+
+**YOU HAVE TO SET THE VERSION OF THE APPLICATION LIKE THIS :**
+
+	my_application.setVersion("vX.X.X")
+
 Do not take care of the platform here **x86_64-slc5-gcc43-opt** because software will be taken from CVMFS with the platform specified in the environment script.
-
-**BUT YOU STILL HAVE TO SET THE VERSION OF THE APPLICATION LIKE THIS :**
-
-my_application.setVersion("vX.X.X")
 
 
 ## 5 - Sandboxes and Data
