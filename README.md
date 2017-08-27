@@ -392,9 +392,9 @@ applications won't run.
 
 For each new release, the release manager has to update this file of the CVMFS/AFS DIRAC installation by contacting CLIC group.
 
-Because you can set version for each application, we set by default, the version **v0.8.1**.
+In principle, you have to set the application's version (which is set by default to **v0.8.1**)
 
-So if the current release of FCCSW is different, release manager should have already updated **dirac.cfg** of CVMFS/AFS DIRAC installation.
+So if the current release of FCC software is different from the default, release manager should have updated **dirac.cfg** of CVMFS/AFS DIRAC installation.
 
 Here is an excerpt of the **dirac.cfg** file :
 
@@ -432,13 +432,21 @@ Operations
 
 ```
 
-So if the version is different from **v0.8.1**, check if the **dirac.cfg** file is up to date and
+Then, if you want to run FCC software with the last release (or a specific one), which are different from the default, you have to ensure that **dirac.cfg** is updated with this release and
 
 **YOU HAVE TO SET THE VERSION OF THE APPLICATION LIKE THIS :**
 
 	my_application.setVersion("vX.X.X")
 
-Do not take care of the platform here **x86_64-slc5-gcc43-opt** because software will be taken from CVMFS with the platform specified in the environment script.
+else FCC software will run with an old release !
+
+Do not take care of the default application's platform here **x86_64-slc5-gcc43-opt** because software will be taken from CVMFS with the platform specified in the environment script.
+
+But if you want to change this value, 
+
+**YOU HAVE TO SET THE PLATFORM OF THE APPLICATION LIKE THIS :**
+
+	my_application.setPatform("architecture-OS-compiler-type")
 
 
 ## 5 - Sandboxes and Data
