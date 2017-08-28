@@ -662,7 +662,26 @@ The setting of the event and the seed is automatically set by :
 
 Dirac proposes also python interfaces for Condor, LSF and others BATCH systems to submit jobs to local BATCH system.
 
-![IMAGE NOT AVAILABLE](tutorial_images/batch.png "HTCondor submission with DIRAC")
+```
+
+from DIRAC.Core.Base import Script
+Script.parseCommandLine()
+
+
+from DIRAC.Resources.Computing.BatchSystems.Condor import Condor
+
+exe = os.path.realpath('temp.sh')
+out = os.path.realpath('condor_dirac')
+options = ''
+
+condor = Condor()
+condor.submitJob(Executable=exe, OutputDir=out, SubmitOptions=options)
+
+```
+
+Do not forget to set the DIRAC environment and check the status of your condor job by typing :
+
+	condor_q
 
 Notice that, there exist already a python API for HTCondor but at this day, submission is not possible until next next release of HTCondor.
 
