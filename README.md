@@ -687,7 +687,7 @@ Do not forget to set the DIRAC environment and check the status of your condor j
 
 Notice that, there exist already a python API for HTCondor but at this day, submission is not possible until next next release of HTCondor.
 
-## 7 - Developer's note
+## 8 - Developer's note
 
 The DIRAC instance of ILC called ILCDirac is available on gitlab :
 
