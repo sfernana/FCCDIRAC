@@ -29,7 +29,7 @@ Contents:
       *	[a - Job splitting](#a---job-splitting)
       * [b - HTCondor submission with DIRAC](#c---htcondor-submission-with-dirac)
     * [8 - Developer's note](#8---developer's-note)
-      * [a - FCC integration in image](#b---fcc-integration-in-image)
+      * [a - FCC integration in image](#a---fcc-integration-in-image)
       * [b - FCC integration in words](#b---fcc-integration-in-words)
 	
 
