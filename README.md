@@ -29,6 +29,8 @@ Contents:
       *	[a - Job splitting](#a---job-splitting)
       * [b - FCC integration](#b---fcc-integration)
       * [c - HTCondor submission with DIRAC](#c---htcondor-submission-with-dirac)
+    * [8 - Developer's note](#8---developer's-note)
+
 	
 
 
@@ -685,6 +687,41 @@ Do not forget to set the DIRAC environment and check the status of your condor j
 
 Notice that, there exist already a python API for HTCondor but at this day, submission is not possible until next next release of HTCondor.
 
+## 7 - Developer's note
+
+The DIRAC instance of ILC called ILCDirac is available on gitlab :
+
+[ILCDirac](https://gitlab.cern.ch/CLICdp/iLCDirac)
+
+FCC software in ILCDirac consists on 2 modules :
+
+[Fcc.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Applications/Fcc.py)
+
+[FccAnalysis.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Workflow/Modules/FccAnalysis.py)
+
+and these are the corresponding tests :
+
+[Test_Fcc.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_Fcc.py)
+
+[Test_FccAnalysis.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Workflow/Modules/Test/Test_FccAnalysis.py)
+
+Adding splitting stuff implied to update user job of ILCDirac :
+
+[UserJob.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/UserJob.py)
+
+and its corresponding test :
+
+[Test_UserJob.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_UserJob.py)
+
+Adding FCC applications implied to update modules testing all existing applications :
+
+[LocalTestObjects.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/LocalTestObjects.py)
+
+[Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
+
+Adding FCC applications implied to update modules's namespace :
+
+[__init__.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Applications/__init__.py)
 
 
 For any questions or any further informations, please contact us at : fcc-experiments-sw-devATSPAMNOTcern.ch
