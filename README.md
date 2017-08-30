@@ -27,10 +27,10 @@ Contents:
       * [b - Web Portal](#b---web-portal)
     * [7 - Advanced](#7---advanced)
       *	[a - Job splitting](#a---job-splitting)
-      * [b - FCC integration](#b---fcc-integration)
-      * [c - HTCondor submission with DIRAC](#c---htcondor-submission-with-dirac)
+      * [b - HTCondor submission with DIRAC](#c---htcondor-submission-with-dirac)
     * [8 - Developer's note](#8---developer's-note)
-
+      * [a - FCC integration in image](#b---fcc-integration-in-image)
+      * [b - FCC integration in words](#b---fcc-integration-in-words)
 	
 
 
@@ -656,11 +656,8 @@ The setting of the event and the seed is automatically set by :
 - appending another configuration file to GAUDI for FccSw (for the seed, the default random generator used is : **HepRndm::Engine&lt;CLHEP::RanluxEngine&gt;**)
 - overwritting card files for Pythia
 
-### b - FCC integration
 
-![IMAGE NOT AVAILABLE](tutorial_images/integration.png "FCC inside ILCDirac")
-
-### c - HTCondor submission with DIRAC
+### b - HTCondor submission with DIRAC
 
 Dirac proposes also python interfaces for Condor, LSF and others BATCH systems to submit jobs to local BATCH system.
 
@@ -688,6 +685,12 @@ Do not forget to set the DIRAC environment and check the status of your condor j
 Notice that, there exist already a python API for HTCondor but at this day, submission is not possible until next next release of HTCondor.
 
 ## 8 - Developer's note
+
+### a - FCC integration in image
+
+![IMAGE NOT AVAILABLE](tutorial_images/integration.png "FCC inside ILCDirac")
+
+### b - FCC integration in words
 
 The DIRAC instance of ILC called ILCDirac is available on gitlab :
 
