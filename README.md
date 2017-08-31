@@ -348,6 +348,8 @@ FCC_PHYSICS1 = FccAnalysis(
     fccConfFile='/cvmfs/fcc.cern.ch/sw/0.8.1/fcc-physics/0.2.1/x86_64-slc6-gcc62-opt/share/ee_ZH_Zmumu_Hbb.txt'
 )
 
+FCC_PHYSICS1.setOutputFile("ee_ZH_Zmumu_Hbb.root")
+
 #2nd FCC application
 FCC_PHYSICS2 = FccAnalysis(
     executable='fcc-physics-read'
@@ -401,7 +403,7 @@ simulation = FccSw(
 )
 
 #sim.numberOfEvents = 500
-#simulation.setOutputFile("sim_particleType_energy_bfield_eta_i.root")
+simulation.setOutputFile("output_ecalSim_e50GeV_1events.root")
 
 reconstruction = FccSw(
     fccConfFile='/build/YOUR_USERNAME/FCC/FCCSW/Reconstruction/RecCalorimeter/tests/options/runEcalReconstructionWithoutNoise.py',
@@ -418,6 +420,15 @@ print job.submit(ILC,mode='local')
 
 
 ```
+
+The application's dependancy is done using conjointly :
+
+	application.setOutputFile()
+and
+	application.getInputFromApp()
+
+It is not possible to specify list for these methods but Fcc applications can already manage it in the case
+if list would be accepted later.
 
 If you did not specify the output file like this :
 
@@ -624,8 +635,8 @@ You have to use a specific command if you want to download the output sandbox (s
 
 ### b - Data
 
-Sandboxes can not exceed 10 Mo, so if your job generates output files with a total size bigger than 10 Mo (e.g. root file), or need input files
-with a total size bigger than 10 Mo, you need to use respectively output data and input data.
+Sandboxes can not exceed 10 Mb, so if your job generates output files with a total size bigger than 10 Mb (e.g. root file), or need input files
+with a total size bigger than 10 Mb, you need to use respectively output data and input data.
 
 In general, these files reside in permanent storage elements like EOS, CASTOR etc...
 
@@ -856,7 +867,31 @@ For FccSw :
 
 [geant_fastsim.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v26r0/Testfiles/geant_fastsim.py)
 
-[Detector](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v26r0/Testfiles/Detector)
+
+**IMPORTANT**
+
+FccSw needs Detector folder which is not present on the release **v0.8.1**, so it will not run.
+
+Then, from the next release, you have to uncomment this method (of the file : [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)) :
+
+```
+
+# TO UNCOMMENT when Detector folder of FCCSW will be on CVMFS
+#def runFccSwTest():
+#  """runs the fccsw test only"""
+#  #Script.parseCommandLine()
+#  suite = unittest.TestSuite()
+#  suite.addTest(JobTestCase('test_fccsw'))
+#  testResult = unittest.TextTestRunner( verbosity = 1 ).run( suite )
+#  print testResult
+
+```
+
+But you have also to modify the installation path here :
+
+    myFccSwPath = "/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt"
+
+by the good one.
 
 Adding FCC applications implied to update module's namespace :
 
