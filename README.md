@@ -16,7 +16,7 @@ Contents:
       * [b - Setting up ILCDIRAC environment](#b---setting-up-ilcdirac-environment)
     * [4 - Examples](#4---examples)
       * [a - Simple FCC job](#a---simple-fcc-job)
-      * [b - Complex FCC Job](#b---complex-fcc-job)
+      * [b - Complex FCC Jobs](#b---complex-fcc-jobs)
     * [5 - Sandboxes and Data](#5---sandboxes-and-data)
       * [a - Sandboxes](#a---sandboxes)
       * [b - Data](#b---data)
@@ -27,7 +27,7 @@ Contents:
       * [b - Web Portal](#b---web-portal)
     * [7 - Advanced](#7---advanced)
       *	[a - Job splitting](#a---job-splitting)
-      * [b - HTCondor submission with DIRAC](#c---htcondor-submission-with-dirac)
+      * [b - HTCondor submission with DIRAC](#b---htcondor-submission-with-dirac)
     * [8 - Developer's note](#8---developer's-note)
       * [a - FCC integration in image](#a---fcc-integration-in-image)
       * [b - FCC integration in words](#b---fcc-integration-in-words)
@@ -203,11 +203,11 @@ The following installation is scpecific to ILC VO but it is quite similar to the
 Installation scripts (e.g. **ilcdirac-install.sh**) and cfg files (e.g. **defaults-ILCDIRAC.cfg**) may differ according to your VO.
 
 
-This client is composed of a set of commands that allow you to manage your jobs as well as your data.
+This client is composed of a set of commands which allows you to manage your jobs as well as your data.
 
 ILCDIRAC client requires your certificate in a specific format, you need to convert your GRID certificate from p12 format (as you exported it from your browser) to PEM format.
 
-But don't worry, the client has already a tool for that :D (dirac-cert-convert.sh).
+But don't worry, the client has already a tool for that :D (**dirac-cert-convert.sh**).
 
 It will store your converted certificate to your **.globus** directory.
 
@@ -259,6 +259,10 @@ Let's go step by step with 2 examples.
 
 With the 2 following examples, the user has to consider that there exist a "UserJob" (inheriting from DIRAC Job) that may contain one or several applications.
 
+Before using ILCDirac, ensure that you set DIRAC environment and updated the proxy (if it is outdated, after 24h ) !
+
+	source /path/to/dirac/installation/bashrc
+	dirac-proxy-init
 
 ### a - Simple FCC Job
 
@@ -266,6 +270,7 @@ With the 2 following examples, the user has to consider that there exist a "User
 In this simple example, we want to run **FCCSW** on the GRID.
 
 ```
+#!/bin/env python
 
 from DIRAC.Core.Base import Script
 Script.parseCommandLine()
@@ -306,7 +311,7 @@ job.submit(ILC,mode='wms')
 
 ```
 
-### b - Complex FCC Job
+### b - Complex FCC Jobs
 
 
 Now, let us complicate things in doing chaining between **FCC Analysis** applications !
@@ -317,7 +322,7 @@ The second application reads these events.
 
 
 ```
-
+#!/bin/env python
 
 from DIRAC.Core.Base import Script
 Script.parseCommandLine()
@@ -331,7 +336,7 @@ ILC = DiracILC()
 # job settings for a user job
 job = UserJob()
 job.setJobGroup("FCC")
-job.setName("Fcc Chain")
+job.setName("FccAnalysis Chain")
 job.setPlatform('x86_64-slc5-gcc43-opt')
 # e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
 job.setLogLevel('DEBUG')
@@ -360,11 +365,84 @@ job.submit(ILC,mode='wms')
 
 ```
 
+
+Then, let us do chaining between **FCCSW** applications !
+
+The first FCCSW application generate root file from the configuration file **geant_fullsim_ecal_singleparticles.py**.
+
+The second one read the generated root file and do reconstruction.
+
+```
+
+#!/bin/env python
+from DIRAC.Core.Base import Script
+Script.parseCommandLine()
+
+from ILCDIRAC.Interfaces.API.DiracILC import DiracILC
+from ILCDIRAC.Interfaces.API.NewInterface.UserJob import UserJob
+from ILCDIRAC.Interfaces.API.NewInterface.Applications import FccSw, FccAnalysis
+
+ILC = DiracILC()
+
+job = UserJob()
+
+job.setJobGroup("FCC")
+job.setName("FccSw Chain")
+job.setPlatform('x86_64-slc5-gcc43-opt')
+# e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
+job.setLogLevel('DEBUG')
+
+job.setOutputSandbox(["*.log","*.root"])
+
+#1st FCC application
+simulation = FccSw(
+    fccConfFile='/build/YOUR_USERNAME/FCC/FCCSW/Reconstruction/RecCalorimeter/tests/options/geant_fullsim_ecal_singleparticles.py',
+    fccSwPath='/build/YOUR_USERNAME/FCC/FCCSW',
+)
+
+#sim.numberOfEvents = 500
+#simulation.setOutputFile("sim_particleType_energy_bfield_eta_i.root")
+
+reconstruction = FccSw(
+    fccConfFile='/build/YOUR_USERNAME/FCC/FCCSW/Reconstruction/RecCalorimeter/tests/options/runEcalReconstructionWithoutNoise.py',
+    fccSwPath='/build/YOUR_USERNAME/FCC/FCCSW',
+    read=True
+)
+
+reconstruction.getInputFromApp(simulation)
+
+job.append(simulation)
+job.append(reconstruction)
+
+print job.submit(ILC,mode='local')
+
+
+```
+
+If you did not specify the output file like this :
+
+	simulation.setOutputFile("sim_particleType_energy_bfield_eta_i.root")
+
+It will be generated automatically and these are the files of the output sandbox :
+
+	FccSw_v0.8.1_Step_1.log
+	FccSw_v0.8.1_Step_2.log
+	JobID_ID_FccSw_v0.8.1_Step_1.root
+	JobID_ID_FccSw_v0.8.1_Step_2.root
+
+Setting the number of events of the first application set it also for all the others.
+
+Notice that we set the parameter **read** to True in the 2nd application.
+
+Because this application is reading ouput of the previous application, setting this parameter give this file as input to **FCCDataSvc**.
+
+If you set the parameter **read** to true without getting output of the previous application, it will give input data to **FCCDataSvc** if there are.
+
 In these examples, FCCSW installation is located at **/build/&lt;YOUR_USERNAME&gt;/FCC**.
 
-If necessary, change it to make it point to your local FCCSW location.
+Change it to make it point to your local FCCSW location.
 
-You can also use FCCSW installation of CVMFS (this corresponds to fccSwPath):
+You can also use FCCSW installation of CVMFS (this is the path you have to give for fccSwPath):
 
 	/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt
 
@@ -381,7 +459,7 @@ Please, read the log before confirming the submission to be sure that you miss n
 
 In this case you have to upload the missing folder **Detector** into the input sandbox like this :
 
-	job.setInputSandbox('/build/&lt;YOUR_USERNAME&gt;/FCC/FCCSW/Detector')
+	job.setInputSandbox('/build/<YOUR_USERNAME>/FCC/FCCSW/Detector')
 
 
 We provided you a more complete example here [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/fcc_apps_inside_ilc/fcc_user_submit.py).
