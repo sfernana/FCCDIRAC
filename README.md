@@ -306,12 +306,6 @@ job.submit(ILC,mode='wms')
 
 ```
 
-In this example, FCCSW installation is located at **/build/&lt;YOUR_USERNAME&gt;/FCC**.
-If necessary, change it to make it point to your real FCCSW location.
- 
-You can also use FCCSW installation of CVMFS but ensure that your configuration file does not use extra files that are not present in CVMFS else a beautiful error message will be printed !
-
-
 ### b - Complex FCC Job
 
 
@@ -365,6 +359,30 @@ job.setOutputData('ee_ZH_Zmumu_Hbb.root')
 job.submit(ILC,mode='wms')
 
 ```
+
+In these examples, FCCSW installation is located at **/build/&lt;YOUR_USERNAME&gt;/FCC**.
+
+If necessary, change it to make it point to your local FCCSW location.
+
+You can also use FCCSW installation of CVMFS (this corresponds to fccSwPath):
+
+	/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt
+
+However, this tutorial was written during **v0.8.1** release.
+
+And some folders like **Detector** and **Generation** are missing, so configuration files examples coming from FCCSW requesting files of these folders will make FCCSW crash.
+
+You will see a warning message before the submission saying that :
+
+	WARN: Sandboxing : The folder 'Detector' does not exist, it is not present in the FCCSW installation
+	WARN: Then you should have added it manually to the input sandbox !
+
+Please, read the log before confirming the submission to be sure that you miss nothing.
+
+In this case you have to upload the missing folder **Detector** into the input sandbox like this :
+
+	job.setInputSandbox('/build/&lt;YOUR_USERNAME&gt;/FCC/FCCSW/Detector')
+
 
 We provided you a more complete example here [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/fcc_apps_inside_ilc/fcc_user_submit.py).
 
@@ -436,7 +454,7 @@ Operations
 
 Then, if you want to run FCC software with the last release (or a specific one), which are different from the default, you have to ensure that **dirac.cfg** is updated with this release and
 
-**YOU HAVE TO SET THE VERSION OF THE APPLICATION LIKE THIS :**
+**YOU HAVE ALSO TO SET THE VERSION OF THE APPLICATION LIKE THIS :**
 
 	my_application.setVersion("vX.X.X")
 
@@ -446,10 +464,32 @@ Do not take care of the default application's platform here **x86_64-slc5-gcc43-
 
 But if you want to change this value, 
 
-**YOU HAVE TO SET THE PLATFORM OF THE APPLICATION LIKE THIS :**
+**YOU HAVE ALSO TO SET THE PLATFORM OF THE APPLICATION LIKE THIS :**
 
 	my_application.setPatform("architecture-OS-compiler-type")
 
+Suppose you want to update the **dirac.cgf** file with the release version **v0.9.1** :
+
+      v0.8.1
+      {
+          CVMFSEnvScript = /cvmfs/fcc.cern.ch/sw/0.8.1/init_fcc_stack.sh
+          CVMFSPath = /cvmfs/fcc.cern.ch/sw/0.8.1
+      }
+
+      v0.9.1
+      {
+          CVMFSEnvScript = /cvmfs/fcc.cern.ch/sw/0.9.1/init_fcc_stack.sh
+          CVMFSPath = /cvmfs/fcc.cern.ch/sw/0.9.1
+      }
+
+You should add a new section(the last one) keeping the old one to ensure backward compatibility with tests done in :
+
+
+[LocalTestObjects.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/LocalTestObjects.py)
+
+[Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
+
+Else you will have to update these tests also (the path of the FCCSW installation in CVMFS precisely).
 
 ## 5 - Sandboxes and Data
 
@@ -721,6 +761,17 @@ Adding FCC applications implied to update modules testing all existing applicati
 [LocalTestObjects.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/LocalTestObjects.py)
 
 [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
+
+And for these tests, we upload the following files to make the applications run :
+
+For FccAnalysis :
+
+[ee_ZH_Zmumu_Hbb.txt](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v26r0/Testfiles/ee_ZH_Zmumu_Hbb.txt)
+
+For FccSw :
+
+[geant_fastsim.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v26r0/Testfiles/geant_fastsim.py)
+[Detector](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v26r0/Testfiles/Detector)
 
 Adding FCC applications implied to update modules's namespace :
 
