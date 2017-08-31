@@ -120,7 +120,7 @@ For FCC group, 2 applications have been designed :
 - FccSw
 - FccAnalysis
 
-However in order to use them and submit a FCC job, you need to fullfill the prerequisites. 
+However in order to use them and submit a FCC job, you need to fulfill the prerequisites.
 
 ## 3 - Prerequisites
 
@@ -368,9 +368,9 @@ job.submit(ILC,mode='wms')
 
 Then, let us do chaining between **FCCSW** applications !
 
-The first FCCSW application generate root file from the configuration file **geant_fullsim_ecal_singleparticles.py**.
+The first FCCSW application generates root file from the configuration file **geant_fullsim_ecal_singleparticles.py**.
 
-The second one read the generated root file and do reconstruction.
+The second one reads the generated root file and do reconstruction.
 
 ```
 
@@ -462,7 +462,7 @@ In this case you have to upload the missing folder **Detector** into the input s
 	job.setInputSandbox('/build/<YOUR_USERNAME>/FCC/FCCSW/Detector')
 
 
-We provided you a more complete example here [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/fcc_apps_inside_ilc/fcc_user_submit.py).
+We provided you a ready-to-use example here [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/fcc_apps_inside_ilc/fcc_user_submit.py).
 
 You should get a display similar to this one :
 
@@ -471,6 +471,10 @@ You should get a display similar to this one :
 Notice that these examples are submitting to the grid, you can also submit to your local machine by changing the mode like this :
 
 	job.submit(ILC,mode='local')
+
+If for some reasons these applications are not convenient for you, you can always set a generic application and add it to the workflow :
+
+[Generic Application](https://twiki.cern.ch/twiki/bin/view/CLIC/ILCDiracApplicationInterface#Generic_application)
 
 **WARNING**
 
@@ -538,13 +542,15 @@ Then, if you want to run FCC software with the last release (or a specific one),
 
 else FCC software will run with an old release !
 
-Do not take care of the default application's platform here **x86_64-slc5-gcc43-opt** because software will be taken from CVMFS with the platform specified in the environment script.
+Do not take care of the default application's platform here **x86_64-slc5-gcc43-opt** because software will be taken from CVMFS with the platform specified in the FCC environment script.
 
 But if you want to change this value, 
 
 **YOU HAVE ALSO TO SET THE PLATFORM OF THE APPLICATION LIKE THIS :**
 
-	my_application.setPatform("architecture-OS-compiler-type")
+	job.setPatform("architecture-OS-compiler-type")
+
+You should not change this because ILCDirac supports a pre-defined set of platforms !
 
 Suppose you want to update the **dirac.cgf** file with the release version **v0.9.1** :
 
@@ -681,7 +687,7 @@ Notice that you can also specify a list for the input data.
 
 In specifying file by its LFN, it will look for this input data into the File Catalog then upload it with the job from the closest site (e.g. CERN).
 
-Notice that data can have replicas in different sites.
+Notice that data can have replicas in many sites.
 
 ## 6 - Monitoring
 
@@ -693,11 +699,11 @@ How to check your job status :
 	dirac-wms-job-status YOUR_JOB_ID
 
 
-How to get back the output :
+How to get back the output sandbox :
 
 	dirac-wms-job-get-output YOUR_JOB_ID
 
-How to browse the File Catalog :
+How to browse the File Catalog (data) :
 
 	dirac-dms-filecatalog-cli
 
@@ -814,13 +820,13 @@ The DIRAC instance of ILC called ILCDirac is available on gitlab :
 
 [ILCDirac](https://gitlab.cern.ch/CLICdp/iLCDirac)
 
-FCC software in ILCDirac consists on 2 modules :
+FCC software in ILCDirac consists of 2 modules :
 
 [Fcc.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Applications/Fcc.py)
 
 [FccAnalysis.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Workflow/Modules/FccAnalysis.py)
 
-and these are the corresponding tests :
+and their corresponding tests :
 
 [Test_Fcc.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_Fcc.py)
 
@@ -849,9 +855,10 @@ For FccAnalysis :
 For FccSw :
 
 [geant_fastsim.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v26r0/Testfiles/geant_fastsim.py)
+
 [Detector](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v26r0/Testfiles/Detector)
 
-Adding FCC applications implied to update modules's namespace :
+Adding FCC applications implied to update module's namespace :
 
 [__init__.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Applications/__init__.py)
 
