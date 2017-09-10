@@ -28,7 +28,7 @@ Contents:
     * [7 - Advanced](#7---advanced)
       *	[a - Job splitting](#a---job-splitting)
       * [b - HTCondor submission with DIRAC](#b---htcondor-submission-with-dirac)
-    * [8 - Developer's note](#8---developer's-note)
+    * [8 - Developer Notes](#8---developer-notes)
       * [a - FCC integration in image](#a---fcc-integration-in-image)
       * [b - FCC integration in words](#b---fcc-integration-in-words)
 	
@@ -43,7 +43,7 @@ Contents:
 
 ### a - Introduction
 
-This tutorial is intented to people who want to run FCC jobs on the GRID.
+This tutorial is intented for people interested in submitting FCC jobs on the GRID.
 
 GRID submission relies on GRID framework providing an intuitive user interface quite similar to BATCH submission.
 
@@ -873,7 +873,7 @@ Do not forget to set the DIRAC environment and check the status of your condor j
 
 There exists already a python API for HTCondor but at the moment we wrote this tutorial, submission was not possible until next next release of HTCondor.
 
-## 8 - Developer's note
+## 8 - Developer Notes
 
 ### a - FCC integration in image
 
