@@ -13,7 +13,7 @@ Contents:
       * [b - Application](#b---application)
     * [3 - Prerequisites](#3---prerequisites)
       * [a - GRID access](#a---grid-access)
-      * [b - Setting up ILCDIRAC environment](#b---setting-up-ilcdirac-environment)
+      * [b - Setting up DIRAC environment](#b---setting-up-dirac-environment)
     * [4 - Examples](#4---examples)
       * [a - Simple FCC job](#a---simple-fcc-job)
       * [b - Complex FCC Jobs](#b---complex-fcc-jobs)
@@ -49,13 +49,20 @@ GRID submission relies on GRID framework providing an intuitive user interface q
 
 This tutorial aims to show you how to use this interface in order to submit FCC jobs.
 
+In brief, it consists of :
+
+-	[Getting GRID certificate](#a---grid-access)
+-	[Registering to ILC VO](#register-to-ilc-vo)
+-	[Setting DIRAC environment](#dirac-environment)
+-	[Running examples](#4---examples)
+
 ### b - DIRAC
 
 DIRAC project was initially developed for the LHCb Collaboration and became a general-purpose Grid Middleware.
 
-DIRAC builds a layer between the users and the resources offering a homogeneous interface to an heterogeneous set of computing resources (Middlewares, VMs,laptops,...). 
+DIRAC builds a layer between the users and the resources offering a homogeneous interface to an heterogeneous set of computing resources (Middlewares, VMs, laptops,...).
 
-It is now used by several communities, more than 20 VOs (Virtual Organizations) e.g. CLIC, LHCb, Belle etc...
+It is now used by several communities, more than 20 VOs (Virtual Organizations) like CLIC, LHCb, Belle ...
 
 FCC group choose to use DIRAC because of its many benefits (Non-exhaustive list) :
 
@@ -67,16 +74,16 @@ FCC group choose to use DIRAC because of its many benefits (Non-exhaustive list)
 - BookKeeping
 - Webportal (a Friendly Web interface to monitor your jobs)
 
-DIRAC is VO oriented so generally, an instance of the DIRAC framework is managed by a VO e.g. :
+DIRAC is VO oriented so generally, an instance of the DIRAC framework is managed by a VO :
 
-- ILCDIRAC (managed by CLIC)
-- LHCbDIRAC (managed by LHCb)
+- ILCDirac (managed by CLIC VO)
+- LHCbDirac (managed by LHCb VO)
 
-They manage DIRAC servers configuring for doing job scheduling, data bookkeeping etc...
+They manage DIRAC servers configuring for doing job scheduling, data bookkeeping ...
 
 Because it is too redundant to create a new instance of DIRAC for each VO, FCC group decided to collaborate with CLIC group.
 
-So CLIC group is sharing ILCDIRAC with FCC group.
+So CLIC group is sharing ILCDirac with FCC group.
 
 A multi VO installation is possible with DIRAC and it is a matter of server configuration.
 
@@ -96,13 +103,13 @@ An application can be considered as a step for a job.
 
 We are used to know that jobs are simple executables running with input/output files. 
 
-Thanks to this new concept, you can specify a job like a chain of applications or a succession of steps where each step can be an executable. 
+Now you can specify a job like a chain of applications or a succession of steps where each step can be an executable.
 
-It is also possible to have dependency between each step.
+It is also possible to have dependencies between each step.
 
 ### b - Application
 
-VOs have created many applications in their DIRAC instance with a specific purpose :
+VOs created many applications in their DIRAC instance with a specific purpose :
 
 - Simulation
 - Reconstruction
@@ -113,14 +120,14 @@ Then a physics process is easy to define with DIRAC because we have the job repr
  
 Usually, users just have to "configure" the application, add user libraries if needed and submit the job.
 
-Indeed applications are pre-defined (executable, parameters ...)
+Indeed, applications are pre-defined (environment, executable ...)
 
 For FCC group, 2 applications have been designed :
 
 - FccSw
 - FccAnalysis
 
-However in order to use them and submit a FCC job, you need to fulfill the prerequisites.
+However, in order to use them and submit a FCC job, you need to fulfill the prerequisites.
 
 ## 3 - Prerequisites
 
@@ -134,22 +141,23 @@ First, to be authorized to use the GRID, you need to have :
 
 Second, to be able to submit jobs through DIRAC interware, in general you need :
 
-- to join a VO (Virtual Organization) which has already set up on their servers an instance of DIRAC for its members
+- to register to a VO (Virtual Organization) which has already set up on their servers an instance of DIRAC for its members
 
+#### Register to ILC VO
 
-Instructions for these 2 primordial steps can be found here :
+Instructions for registering to ILC VO (also getting GRID access) can be found here :
 
 - [CLIC tutorial](https://twiki.cern.ch/twiki/bin/view/CLIC/IlcdiracRegistration)
 
-or here :
+or here (lhcb users) :
 
 - [LHCB tutorial](https://twiki.cern.ch/twiki/bin/view/LHCb/FAQ/Certificate)
 
 
-Because FCC group collaborate with CLIC group, new FCC users have to register to the CLIC VO.
+Because FCC group collaborated with CLIC group, FCC users have to register to the ILC VO.
 
 
-So, in the next section, the instructions of the client installation are specific to the CLIC VO.
+So, in the next section, the instructions of the client installation are specific to the ILC VO.
 
 
 If you encounter some problems with the client installation, very good tutorials are also available here :
@@ -162,59 +170,59 @@ or here :
 [LCD tutorial](http://lcd-data.web.cern.ch/lcd-data/doc/HeadFirstTalk.pdf)
 
 
-### b - Setting up ILCDIRAC environment
+### b - Setting up DIRAC environment
 
-ILCDIRAC is  an  extension/instance of  the DIRAC framework, it is  built  on  top  of  the  workflow  API  from Dirac. 
+ILCDirac is the  extension/instance of  the DIRAC framework for ILC VO, it is  built  on  top  of  the  workflow  API  from Dirac.
 
-ILCDIRAC offers a set of applications used in the LC community and 14 applications are  currently  supported  natively by ILCDIRAC. 
+It offers a set of applications used in the LC community and 14 applications are currently supported.
 
 Among  them  are  :
 
 -	SLIC and Mokka (detector  simulation  frameworks  based  on Geant4)
 -	Marlin and org.lcsim (reconstruction and analysis frameworks)
--	Monte Carlo generators (Whizard,Pythia) and ROOT
+-	Monte Carlo generators (Whizard, Pythia) and ROOT
 
 
 Here are the minimum requirements if you want to continue this tutorial :
 
--	a computer running Linux  or MacOS X 
+-	a computer running Linux or MacOS X
 -	a working version of Python (v2.4 minimum)
 -	to be able to install some software on your computer
 
 
 As you guess, DIRAC works in client-server architecture.
 
-ILCDIRAC servers are running somewhere while users submit their jobs through a local client which relays jobs to the servers.
+ILCDirac servers are running somewhere while users submit their jobs through a local client which relays jobs to the servers.
 
 At the end of this tutorial, you will be able from your seat to run a job on a machine located at the other side of the planet without paying attention about **WHERE** or **HOW** it works,
 all this thanks to the GRID infrastructure and Abstraction layer built by DIRAC.
 
-In order to use ILCDIRAC, you need first to get the ILCDIRAC client.
+In order to use ILCDirac, you need first to get the client.
 
-ILCDIRAC client is already installed on AFS/CVMFS, you can follow the instructions here :
+The client is already installed on AFS/CVMFS, you can follow the instructions here :
 
 [CLIC twiki tutorial](https://twiki.cern.ch/twiki/bin/view/CLIC/IlcdiracEnvironment#Using_a_pre_existing_installatio)
 
-Indeed, you only have to source a script and configure ILCDIRAC client using a proxy and your Grid certificate.
+Indeed, you only have to set the environment and configure the client with the proxy and the GRID certificate.
 
-If you do not have access to AFS neither CVMFS, you can install ILCDIRAC client locally.
+If you do not have access to AFS neither CVMFS, you can download and install the client locally.
 
 The following installation is scpecific to ILC VO but it is quite similar to the general procedure.
 Installation scripts (e.g. **ilcdirac-install.sh**) and cfg files (e.g. **defaults-ILCDIRAC.cfg**) may differ according to your VO.
 
-
 This client is composed of a set of commands which allows you to manage your jobs as well as your data.
 
-ILCDIRAC client requires your certificate in a specific format, you need to convert your GRID certificate from p12 format (as you exported it from your browser) to PEM format.
+ILCDirac client requires your certificate in a specific format, you need to convert your GRID certificate from p12 format (as you exported it from your browser) to PEM format.
 
 But don't worry, the client has already a tool for that :D (**dirac-cert-convert.sh**).
 
-It will store your converted certificate to your **.globus** directory.
+It will store your converted certificate to the **.globus** directory.
 
+Here are the instructions of how to install the client and configure it with your GRID certificate (even the certificate conversion is included, no need to make it before):
 
-Here are the instructions of how to install ILCDIRAC client and configure it with your GRID certificate (even the certificate conversion is included, no need to make it before):
+#### DIRAC environment
 
-If you want to use the pre existing installation skip step 1 and execute step 22 instead of step 2.
+If you want to use the client of AFS/CVMFS skip step 1 and execute step 22 instead of step 2.
 
 
 ```
@@ -226,10 +234,14 @@ wget http://www.cern.ch/lcd-data/software/ilcdirac-install.sh
 chmod +x ilcdirac-install.sh
 ./ilcdirac-install.sh
 
-#2) set ILCDIRAC environment of your client
+#2) set ILCDirac environment from your local client
+# bash users
 source bashrc
 
-#22) set ILCDIRAC environment of the pre client
+# (t)csh users
+#source cshrc
+
+#22) set ILCDirac environment from the AFS/CVMFS client
 #source /afs/cern.ch/eng/clic/software/DIRAC/bashrc
 
 #3) set GRID user proxy
@@ -242,16 +254,20 @@ cd ..
 
 ```
 
-**ilcdirac-install.sh** will install ILCDIRAC client in your machine.
+**ilcdirac-install.sh** will install the client in your machine.
 
-Replace **your_grid_certificate.p12** by your real certificate name.
+Replace **/path/to/your_grid_certificate.p12** by the path of your certificate.
 
 The file **defaults-ILCDIRAC.cfg** is specific to ILC and it is a configuration file which help users to configure DIRAC client according to the VO they are affiliated with.
 
 Each VO using DIRAC should have such a file which helps their users to configure DIRAC client quickly.
 
-If you are affiliated with a VO different from ILC, please refer to your VO DIRAC website or contact your VO administrator to get this file.
- 
+If you are affiliated with a VO different from ILC, please refer to the tutorial dedicated for the instance of DIRAC of your VO or contact your VO  manager to get this file.
+
+If you encounter some problems during the installation (e.g. ImportError: No module named GSI) please refer to these discussions :
+
+[DIRAC client installation issue](https://groups.google.com/forum/#!topic/diracgrid-forum/J2hDZc6WbaM)
+
 ## 4 - Examples
 
 
@@ -259,9 +275,11 @@ Let's go step by step with 2 examples.
 
 With the 2 following examples, the user has to consider that there exist a "UserJob" (inheriting from DIRAC Job) that may contain one or several applications.
 
-Before using ILCDirac, ensure that you set DIRAC environment and updated the proxy (if it is outdated, after 24h ) !
+Before using ILCDirac, ensure that you set the environment and updated the proxy (if it is outdated, after 24h ) !
 
+	# each time you open a new shell
 	source /path/to/dirac/installation/bashrc
+	# each day
 	dirac-proxy-init
 
 ### a - Simple FCC Job
@@ -367,12 +385,13 @@ job.submit(ILC,mode='wms')
 
 ```
 
+Indeed, the input card file of the second FccAnalysis application is the output file of the first FccAnalysis application.
 
 Then, let us do chaining between **FCCSW** applications !
 
 The first FCCSW application generates root file from the configuration file **geant_fullsim_ecal_singleparticles.py**.
 
-The second one reads the generated root file and do reconstruction.
+The second one reads the generated root file **output_ecalSim_e50GeV_1events.root** and do the reconstruction.
 
 ```
 
@@ -416,68 +435,73 @@ reconstruction.getInputFromApp(simulation)
 job.append(simulation)
 job.append(reconstruction)
 
-print job.submit(ILC,mode='local')
+print job.submit(ILC,mode='wms')
 
 
 ```
 
-The application's dependancy is done using conjointly :
+You can set the number of events like this :
 
-	application.setOutputFile()
-and
-	application.getInputFromApp()
-
-It is not possible to specify list for these methods but Fcc applications can already manage it in the case
-if list would be accepted later.
-
-If you did not specify the output file like this :
-
-	simulation.setOutputFile("sim_particleType_energy_bfield_eta_i.root")
-
-It will be generated automatically and these are the files of the output sandbox :
-
-	FccSw_v0.8.1_Step_1.log
-	FccSw_v0.8.1_Step_2.log
-	JobID_ID_FccSw_v0.8.1_Step_1.root
-	JobID_ID_FccSw_v0.8.1_Step_2.root
+	simulation.numberOfEvents = 500
 
 Setting the number of events of the first application set it also for all the others.
+
+The application's dependancy is done using conjointly :
+
+	simulation.setOutputFile("output_ecalSim_e50GeV_1events.root")
+
+and
+
+	reconstruction.getInputFromApp(simulation)
+
+It is not possible to specify list for these methods then dependancy with many input/output files does not work the moment we wrote this tutorial.
+
+Nevertheless, we implemented FCC applications in such a way that FCC applications can have dependancies with many input/output files (in the case where the signature of these methods could be modified).
 
 Notice that we set the parameter **read** to True in the 2nd application.
 
 Because this application is reading ouput of the previous application, setting this parameter give this file as input to **FCCDataSvc**.
 
-If you set the parameter **read** to true without getting output of the previous application, it will give input data to **FCCDataSvc** if there are.
+If you set the parameter **read** to True without getting output of the previous application, it will give input data to **FCCDataSvc** if there are.
+
+Output files are renamed by default in pre-pending the ID of the job, the application's name, application's version and the application's step.
+
+Here is an exerpt of the output sandbox of a job running the third example :
+
+	FccSw_v0.8.1_Step_1.log
+	FccSw_v0.8.1_Step_2.log
+	JobID_0_FccSw_v0.8.1_2_output_ecalReco_noNoise_test.root
+	JobID_0_FccSw_v0.8.1_Step_1_output_ecalSim_e50GeV_1events.root
+	...
 
 In these examples, FCCSW installation is located at **/build/&lt;YOUR_USERNAME&gt;/FCC**.
 
 Change it to make it point to your local FCCSW location.
 
-You can also use FCCSW installation of CVMFS (this is the path you have to give for fccSwPath):
+You can also use FCCSW installation of CVMFS (this is the fccSwPath):
 
 	/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt
 
 However, this tutorial was written during **v0.8.1** release.
 
-And some folders like **Detector** and **Generation** are missing, so configuration files examples coming from FCCSW requesting files of these folders will make FCCSW crash.
+And some folders like **Detector** and **Generation** are missing in this release, so some examples requesting these folders will not run.
 
 You will see a warning message before the submission saying that :
 
 	WARN: Sandboxing : The folder 'Detector' does not exist, it is not present in the FCCSW installation
 	WARN: Then you should have added it manually to the input sandbox !
 
-Please, read the log before confirming the submission to be sure that you miss nothing.
+Please, read the log before confirming the submission to be sure that everything is ok !
 
 In this case you have to upload the missing folder **Detector** into the input sandbox like this :
 
 	job.setInputSandbox('/build/<YOUR_USERNAME>/FCC/FCCSW/Detector')
 
 
-We provided you a ready-to-use example here [fcc_user_submit.py](https://github.com/sfernana/FCCDIRAC/blob/fcc_apps_inside_ilc/fcc_user_submit.py).
-
-You should get a display similar to this one :
+If you run 2 FccAnalysis applications followed by one FccSw application, you should get a display similar to this one :
 
 ![IMAGE NOT AVAILABLE](tutorial_images/diracsub.png "submission confirmation")
+
 
 Notice that these examples are submitting to the grid, you can also submit to your local machine by changing the mode like this :
 
@@ -489,23 +513,23 @@ If for some reasons these applications are not convenient for you, you can alway
 
 **WARNING**
 
-Applications are setting environment by asking the following configuration file :
+Applications are getting FCCSW environment by asking this configuration file :
 
-- DIRAC_INSTALLATION/etc/dirac.cfg
+- /path/to/DIRAC_INSTALLATION/etc/dirac.cfg
 
 It contains sections where the path of the environment script is hardcoded.
 
-Each application is looking for this file for setting the environment.
+Each application is looking for this file for setting the environment and FCC applications use by default the version **v0.8.1** of FCCSW release.
 
-If your are using CVMFS/AFS DIRAC installation, it contains already FCC environment script.
+If your are using CVMFS/AFS DIRAC installation, it contains already the default path of the FCCSW environment script :
 
-If your are not using CVMFS/AFS DIRAC installation, then ensure that this file contains FCC environment else
+	/cvmfs/fcc.cern.ch/sw/0.8.1/init_fcc_stack.sh
 
-applications won't run.
+If your are not using CVMFS/AFS DIRAC installation, then ensure that **dirac.cfg** file contains the path of the FCCSW environment script else applications won't run.
 
-For each new release, the release manager has to update this file of the CVMFS/AFS DIRAC installation by contacting CLIC group.
+For each new release, the release manager has to update **dirac.cfg** file of the CVMFS/AFS DIRAC installation by contacting CLIC group.
 
-In principle, you have to set the application's version (which is set by default to **v0.8.1**)
+And you have to set the version of the application (if you do not want to use by default the version **v0.8.1**)
 
 So if the current release of FCC software is different from the default, release manager should have updated **dirac.cfg** of CVMFS/AFS DIRAC installation.
 
@@ -549,9 +573,9 @@ Then, if you want to run FCC software with the last release (or a specific one),
 
 **YOU HAVE ALSO TO SET THE VERSION OF THE APPLICATION LIKE THIS :**
 
-	my_application.setVersion("vX.X.X")
+	application.setVersion("vX.X.X")
 
-else FCC software will run with an old release !
+else FCC software will run by default with the release **v0.8.1** !
 
 Do not take care of the default application's platform here **x86_64-slc5-gcc43-opt** because software will be taken from CVMFS with the platform specified in the FCC environment script.
 
@@ -563,7 +587,7 @@ But if you want to change this value,
 
 You should not change this because ILCDirac supports a pre-defined set of platforms !
 
-Suppose you want to update the **dirac.cgf** file with the release version **v0.9.1** :
+Suppose you want to update the **dirac.cgf** file with the release **v0.9.1** :
 
       v0.8.1
       {
@@ -577,14 +601,44 @@ Suppose you want to update the **dirac.cgf** file with the release version **v0.
           CVMFSPath = /cvmfs/fcc.cern.ch/sw/0.9.1
       }
 
-You should add a new section(the last one) keeping the old one to ensure backward compatibility with tests done in :
+You should add a new section (the last one) keeping the old one to ensure backward compatibility.
 
+ILCDirac contains tests for all existing applications.
+
+The tests of FCC applications are using the release **v0.8.1**.
+
+When reading the **dirac.cfg** file, the path of the FCCSW environment script have to be present else tests will failed.
+
+If you want to remove the section containing the release **v0.8.1**, you have also to update these tests :
 
 [LocalTestObjects.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/LocalTestObjects.py)
 
+in setting the version of the application :
+
+	def getFccSw( self ):
+	    ...
+	    fccsw = FccSw()
+	    fccsw.setVersion("v0.9.1")
+	    ...
+
+and
+
+	def getFccAnalysis( self ):
+	    ...
+            fccanalysis = FccAnalysis()
+	    fccanalysis.setVersion("v0.9.1")
+	    ...
+
 [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
 
-Else you will have to update these tests also (the path of the FCCSW installation in CVMFS precisely).
+in updating the path of FCCSW CVMFS installation :
+
+	myFccSwPath = "/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt"
+
+to
+
+	myFccSwPath = "/cvmfs/fcc.cern.ch/sw/0.9.1/fccsw/0.9.1/x86_64-slc6-gcc62-opt"
+
 
 ## 5 - Sandboxes and Data
 
@@ -602,7 +656,7 @@ JobID_ID_APPLICATIONNAME_APPLICATIONVERSION_APPLICATIONSTEP**.**(log, root or sh
 
 There are the input sandbox and the output sandbox.
 
-The input sandbox contains files the job may use as input like a configuration file or a steering file coming from your local machine.
+The input sandbox contains files the job may use as input like a configuration file or a steering file coming usually from your local machine.
 
 The output sandbox contains files generated by the job, you want to retrieve.
 
@@ -614,7 +668,7 @@ How to set the input sandbox :
 
 	job.setInputSandbox('my_input_file')
 
-Notice that you can also specify a list for the input files.
+Notice that you can also specify a list for the input files (folders are also accepted).
 
 The output sandbox is uploaded to the DIRAC database.
 
@@ -628,8 +682,8 @@ Notice that you can also specify a list for the output files.
 
 Your output files (job's results) are not getting back to your local machine when the job is finished, they are stored :
 	
--	in the DIRAC database if results are smaller than 10 Mb
--	in the DIRAC File Catalog (as data) if results are bigger than 10 Mb
+-	in the DIRAC database if you set the output sandbox and if this one is smaller than 10 Mb
+-	in the DIRAC File Catalog (as data) if you set the output sandbox and if this one is bigger than 10 Mb
 
 You have to use a specific command if you want to download the output sandbox (see [Monitoring section](#6---monitoring)).
 
@@ -650,11 +704,11 @@ Here is a list of CERN storage elements :
 
 [Storage Elements](https://twiki.cern.ch/twiki/bin/view/CLIC/DiracForUsers#Storage_Elements)
 
-Notice that you can also specify a list for the output data.
+Notice that you can also specify a list for the output data (lfns parameter).
 
 You can specify the ouptut file name you want to store permanently in the storage of your choice (e.g. CERN EOS resources).
 
-**my_root_file.root** has to be generated by the job else an error will be araised.
+**my_root_file.root** has to be generated by the job else an error will be raised.
 
 Here is the workflow of outputing data :
 
@@ -694,11 +748,11 @@ Files **consumed** by the job are known as **Input Data** that can specified lik
 
 	job.setInputData("/ilc/user/u/username/my_root_file.root")
 
-Notice that you can also specify a list for the input data.
+Notice that you can also specify a list for the input data (folders are also accepted).
 
-In specifying file by its LFN, it will look for this input data into the File Catalog then upload it with the job from the closest site (e.g. CERN).
+In specifying file by its LFN, it will look for this input data into the File Catalog then it will download the data with the job from the closest site (e.g. CERN).
 
-Notice that data can have replicas in many sites.
+Data can also have replicas in many sites.
 
 ## 6 - Monitoring
 
@@ -726,10 +780,10 @@ Basic operations on the File Catalog can be found here :
 ### b - Web Portal
 
 
-Here is the link to monitor ILCDIRAC jobs and data from the web. If you are not affiliated with ILC, please refer to your VO DIRAC website or contact your VO administrator to know your VO DIRAC web portal address.
+Here is the link to monitor ILCDirac jobs and data from the web. If you are not affiliated with ILC, please refer to your tutorial dedicated for DIRAC of your VO or contact your VO manager to know the right web address.
 
 
-https://ilcdirac.cern.ch/DIRAC/?view=tabs&theme=Grey&url_state=1|*DIRAC.FileCatalog.classes.FileCatalog:*DIRAC.JobMonitor.classes.JobMonitor:,
+[ILCDirac web portal](https://ilcdirac.cern.ch/DIRAC/?view=tabs&theme=Grey&url_state=1|*DIRAC.FileCatalog.classes.FileCatalog:*DIRAC.JobMonitor.classes.JobMonitor:,)
 
 
 
@@ -761,16 +815,16 @@ You ran FCC Jobs on the GRID.
 
 DIRAC is a powerfull framework and we decided to show you here only some basic functionalities.
 
-Notice that we are using user jobs (UserJob) and it could interesting to test production jobs (ProductionJob) with FCC applications for people interested in doing productions.
+Notice that we are using user jobs (UserJob) and it could be interesting to test production jobs (ProductionJob) with FCC applications for people interested in doing productions.
 
 ## 7 - Advanced
 
 
 ### a - Job Splitting
 
-Bulk submission is natively implemented in the DIRAC Job.
+Bulk submission is natively implemented in DIRAC.
 
-In designing Fcc Applications, we introduced a simplified interface for job spliting to make your life easier :) 
+In designing Fcc applications, we introduced a simplified interface for job splitting to make your life easier :)
 
 How to send 2 jobs with each a number of events of 4 :
 
@@ -817,7 +871,7 @@ Do not forget to set the DIRAC environment and check the status of your condor j
 
 	condor_q
 
-Notice that, there exist already a python API for HTCondor but at this day, submission is not possible until next next release of HTCondor.
+There exists already a python API for HTCondor but at the moment we wrote this tutorial, submission was not possible until next next release of HTCondor.
 
 ## 8 - Developer's note
 
@@ -872,7 +926,7 @@ For FccSw :
 
 FccSw needs Detector folder which is not present on the release **v0.8.1**, so it will not run.
 
-Then, from the next release, you have to uncomment this method (of the file : [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)) :
+Then, from the next release, you have to uncomment this method (of the module [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)) :
 
 ```
 
@@ -887,11 +941,10 @@ Then, from the next release, you have to uncomment this method (of the file : [T
 
 ```
 
-But you have also to modify the installation path here :
+And you have also to update the FCCSW installation path if you want to use an other release :
 
     myFccSwPath = "/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt"
 
-by the good one.
 
 Adding FCC applications implied to update module's namespace :
 
