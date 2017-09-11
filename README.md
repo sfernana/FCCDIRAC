@@ -278,7 +278,7 @@ With the 2 following examples, the user has to consider that there exist a "User
 Before using ILCDirac, ensure that you set the environment and updated the proxy (if it is outdated, after 24h ) !
 
 	# each time you open a new shell
-	source /path/to/dirac/installation/bashrc
+	source /afs/cern.ch/eng/clic/software/DIRAC/bashrc
 	# each day
 	dirac-proxy-init
 
@@ -519,7 +519,7 @@ Applications are getting FCCSW environment by asking this configuration file :
 
 It contains sections where the path of the environment script is hardcoded.
 
-Each application is looking for this file for setting the environment and FCC applications use by default the version **v0.8.1** of FCCSW release.
+Each application is looking for this file for setting the environment and FCC applications use by default the release **v0.8.1**.
 
 If your are using CVMFS/AFS DIRAC installation, it contains already the default path of the FCCSW environment script :
 
@@ -871,7 +871,7 @@ Do not forget to set the DIRAC environment and check the status of your condor j
 
 	condor_q
 
-There exists already a python API for HTCondor but at the moment we wrote this tutorial, submission was not possible until next next release of HTCondor.
+There exists already a python API for HTCondor but at the moment we wrote this tutorial, submission was not possible until the next release of HTCondor.
 
 ## 8 - Developer Notes
 
@@ -926,7 +926,7 @@ For FccSw :
 
 FccSw needs Detector folder which is not present on the release **v0.8.1**, so it will not run.
 
-Then, from the next release, you have to uncomment this method (of the module [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)) :
+Then, from the next release, you have to uncomment this method (of the module [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py) Line 308 to Line 315) :
 
 ```
 
@@ -941,7 +941,7 @@ Then, from the next release, you have to uncomment this method (of the module [T
 
 ```
 
-And you have also to update the FCCSW installation path if you want to use an other release :
+And you have also to update the FCCSW installation path if you want to use an other release (Line 65) :
 
     myFccSwPath = "/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt"
 
