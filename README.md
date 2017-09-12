@@ -55,6 +55,7 @@ In brief, it consists of :
 -	[Registering to ILC VO](#register-to-ilc-vo)
 -	[Setting DIRAC environment](#dirac-environment)
 -	[Running examples](#4---examples)
+-	[View results](#6---monitoring)
 
 ### b - DIRAC
 
