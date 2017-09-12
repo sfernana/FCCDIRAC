@@ -389,9 +389,9 @@ Indeed, the input card file of the second FccAnalysis application is the output 
 
 Then, let us do chaining between **FCCSW** applications !
 
-The first FCCSW application generates root file from the configuration file **geant_fullsim_ecal_singleparticles.py**.
+The first FCCSW application generates root file from the configuration file [geant_fullsim_ecal_singleparticles.py](https://github.com/HEP-FCC/FCCSW/blob/master/Reconstruction/RecCalorimeter/tests/options/geant_fullsim_ecal_singleparticles.py).
 
-The second one reads the generated root file **output_ecalSim_e50GeV_1events.root** and do the reconstruction.
+The second FCCSW application reads the generated root file **output_ecalSim_e50GeV_1events.root** and do the reconstruction following the configuration file : [runEcalReconstructionWithoutNoise](https://github.com/HEP-FCC/FCCSW/blob/master/Reconstruction/RecCalorimeter/tests/options/runEcalReconstructionWithoutNoise.py).
 
 ```
 
