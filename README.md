@@ -497,7 +497,7 @@ In these examples, FCCSW installation is located at **/build/&lt;YOUR_USERNAME&g
 
 Change it to make it point to your local FCCSW location.
 
-If you encounter some problems in the execution of FCCSW in the grid with your local installation of FCCSW, please take a look at the [FccSw local problem](#-fccsw-local-problem)
+If you encounter some problems in the execution of FCCSW in the grid with your local installation of FCCSW, please take a look at the [FccSw local problem](#fccsw-local-problem)
 
 You can also use FCCSW installation of CVMFS (this is the fccSwPath):
 
@@ -990,7 +990,7 @@ To fix this, someone has to export new environment variables into the FCC enviro
 
 And the new command (line 528 and 529 of Fcc.py) executed by FccSw application could be :
 
-exec $PYTHON_BIN $XENV --xml InstallArea/FCCSW.xenv gaudirun.py some_configuration_file.py
+	exec $PYTHON_BIN $XENV --xml InstallArea/FCCSW.xenv gaudirun.py some_configuration_file.py
 
 Then FccSw will be able to execute every release of local FCCSW installation.
 
