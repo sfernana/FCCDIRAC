@@ -286,7 +286,13 @@ Before using ILCDirac, ensure that you set the environment and updated the proxy
 ### a - Simple FCC Job
 
 
-In this simple example, we want to run **FCCSW** on the GRID.
+In this simple example, we want to run **FCCSW** on the GRID. FCCSW installation is available on CVMFS but you can also install it on your local machine by following this tutorial :
+
+[FCCSW local installation](https://github.com/HEP-FCC/FCCSW)
+
+Ensure that after compiling you did :
+
+	make install
 
 ```
 #!/bin/env python
@@ -491,11 +497,15 @@ In these examples, FCCSW installation is located at **/build/&lt;YOUR_USERNAME&g
 
 Change it to make it point to your local FCCSW location.
 
+If you encounter some problems in the execution of FCCSW in the grid with your local installation of FCCSW, please take a look at the [FccSw local problem](#-fccsw-local-problem)
+
 You can also use FCCSW installation of CVMFS (this is the fccSwPath):
 
 	/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt
 
-However, this tutorial was written during **v0.8.1** release.
+If you encounter some problems in the execution of FCCSW in the grid with the CVMFS installation of FCCSW, please take this into account :
+
+This tutorial was written during **v0.8.1** release.
 
 And some folders like **Detector** and **Generation** are missing in this release, so some examples requesting these folders will not run.
 
@@ -919,13 +929,13 @@ and its corresponding test :
 
 [Test_UserJob.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_UserJob.py)
 
-Adding FCC applications implied to update modules testing all existing applications :
+Adding FCC applications implied to update modules testing all existing applications inside a job :
 
 [LocalTestObjects.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/LocalTestObjects.py)
 
 [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
 
-And for these tests, we upload the following files to make the applications run :
+And for these job tests, we uploaded the following files to make the applications run :
 
 For FccAnalysis :
 
@@ -935,15 +945,13 @@ For FccSw :
 
 [geant_fastsim.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v26r0/Testfiles/geant_fastsim.py)
 
-
 **IMPORTANT**
 
-FccSw needs Detector folder which is not present on the release **v0.8.1**, so it will not run.
+FccSw job test needs Detector folder which is not present on the release **v0.8.1**, so it will not run, that's why we commented this test.
 
-Then, from the next release, you have to uncomment this method (of the module [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py) Line 308 to Line 315) :
+Then, from the next release (containing the missing folders), you have to uncomment this method (of the module [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py) Line 308 to Line 315) :
 
 ```
-
 # TO UNCOMMENT when Detector folder of FCCSW will be on CVMFS
 #def runFccSwTest():
 #  """runs the fccsw test only"""
@@ -959,10 +967,35 @@ And you have also to update the FCCSW installation path if you want to use an ot
 
     myFccSwPath = "/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt"
 
+#### FccSw local problem
+
+Contrary to the CVMFS FCCSW installation, when using local FCCSW installation, FccSw application does not call FCCSW/run script but execute the following hardcoded command :
+
+```
+exec /cvmfs/sft.cern.ch/lcg/views/LCG_88/x86_64-slc6-gcc62-opt/bin/python /cvmfs/fcc.cern.ch/sw/0.8.1/gaudi/v28r2/x86_64-slc6-gcc62-opt/scripts/xenv --xml InstallArea/FCCSW.xenv gaudirun.py some_configuration_file.py
+```
+
+It is similar to the command called by FCCSW/run :
+
+	run_cmd=$(dirname $0)/build.$BINARY_TAG/run
+
+Except that we use a **.xenv** file not relative to the local FCCSW installation which is not present on the GRID.
+
+However this command is still specific to release **0.8.1** so it may not work with the other releases.
+
+To fix this, someone has to export new environment variables into the FCC environment script :
+
+	export XENV=/cvmfs/xenv
+	export PYTHON_BIN=/cvmfs/python
+
+And the new command (line 528 and 529 of Fcc.py) executed by FccSw application could be :
+
+exec $PYTHON_BIN $XENV --xml InstallArea/FCCSW.xenv gaudirun.py some_configuration_file.py
+
+Then FccSw will be able to execute every release of local FCCSW installation.
 
 Adding FCC applications implied to update module's namespace :
 
 [__init__.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Applications/__init__.py)
-
 
 For any questions or any further informations, please contact us at : fcc-experiments-sw-devATSPAMNOTcern.ch
