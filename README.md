@@ -310,6 +310,7 @@ ILC = DiracILC()
 job = UserJob()
 job.setJobGroup("FCC")
 job.setName("FccSW")
+job.setDestination('LCG.CERN.ch')
 job.setPlatform('x86_64-slc5-gcc43-opt')
 # e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
 job.setLogLevel('DEBUG')
@@ -362,6 +363,7 @@ ILC = DiracILC()
 job = UserJob()
 job.setJobGroup("FCC")
 job.setName("FccAnalysis Chain")
+job.setDestination('LCG.CERN.ch')
 job.setPlatform('x86_64-slc5-gcc43-opt')
 # e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
 job.setLogLevel('DEBUG')
@@ -412,10 +414,11 @@ from ILCDIRAC.Interfaces.API.NewInterface.Applications import FccSw, FccAnalysis
 
 ILC = DiracILC()
 
+# job settings for a user job
 job = UserJob()
-
 job.setJobGroup("FCC")
-job.setName("FccSw Chain")
+job.setName("FccAnalysis Chain")
+job.setDestination('LCG.CERN.ch')
 job.setPlatform('x86_64-slc5-gcc43-opt')
 # e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
 job.setLogLevel('DEBUG')
@@ -502,6 +505,66 @@ If you encounter some problems in the execution of FCCSW in the grid with your l
 You can also use FCCSW installation of CVMFS (this is the fccSwPath):
 
 	/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt
+
+The environment of FCC applications uses CVMFS which may be not accessible from every machines of the GRID.
+
+To ensure that the job has access to CVMFS, in the examples, we specify the destination of the job like this :
+
+	job.setDestination('LCG.CERN.ch')
+
+Then here is the precedent example using this time, the FCCSW installation of CVMFS :
+
+
+```
+
+from DIRAC.Core.Base import Script
+Script.parseCommandLine()
+
+from ILCDIRAC.Interfaces.API.DiracILC import DiracILC
+from ILCDIRAC.Interfaces.API.NewInterface.UserJob import UserJob
+from ILCDIRAC.Interfaces.API.NewInterface.Applications import FccSw, FccAnalysis
+
+ILC = DiracILC()
+
+job = UserJob()
+
+job.setJobGroup("FCC")
+job.setName("FccSw Chain")
+job.setDestination('LCG.CERN.ch')
+job.setPlatform('x86_64-slc5-gcc43-opt')
+# e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
+job.setLogLevel('DEBUG')
+
+job.setInputSandbox("/build/YOUR_USERNAME/FCC/FCCSW/Detector")
+
+job.setOutputSandbox(["*.log","*.root"])
+
+#1st FCC application
+simulation = FccSw(
+    fccConfFile='/build/YOUR_USERNAME/FCC/FCCSW/Reconstruction/RecCalorimeter/tests/options/geant_fullsim_ecal_singleparticles.py',
+    fccSwPath='/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt',
+)
+
+#sim.numberOfEvents = 500
+simulation.setOutputFile("output_ecalSim_e50GeV_1events.root")
+
+reconstruction = FccSw(
+    fccConfFile='/build/YOUR_USERNAME/FCC/FCCSW/Reconstruction/RecCalorimeter/tests/options/runEcalReconstructionWithoutNoise.py',
+    fccSwPath='/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt',
+    read=True
+)
+
+reconstruction.getInputFromApp(simulation)
+
+job.append(simulation)
+job.append(reconstruction)
+
+job.setOutputData("output_ecalReco_noNoise_test.root")
+
+print job.submit(ILC,mode='wms')
+
+
+```
 
 If you encounter some problems in the execution of FCCSW in the grid with the CVMFS installation of FCCSW, please take this into account :
 
