@@ -988,7 +988,7 @@ To fix this, someone has to export new environment variables into the FCC enviro
 	export XENV=/cvmfs/xenv
 	export PYTHON_BIN=/cvmfs/python
 
-And the new command (line 528 and 529 of Fcc.py) executed by FccSw application could be :
+And the new command (check lines 533 and 535 of Fcc.py) executed by FccSw application could be :
 
 	exec $PYTHON_BIN $XENV --xml InstallArea/FCCSW.xenv gaudirun.py some_configuration_file.py
 
