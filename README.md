@@ -320,7 +320,7 @@ job.setOutputSandbox(["*.log","*.root"])
 #1st FCC application
 FCC_SW = FccSw(
     fccConfFile='/build/YOUR_USERNAME/FCC/FCCSW/Examples/options/geant_pgun_fullsim.py',
-    fccSwPath='/build/YOUR_USERNAME/FCC/FCCSW',
+    fccSwPath='/build/YOUR_USERNAME/FCC/FCCSW'
 )
 
 FCC_SW.logLevel = 'DEBUG'
@@ -403,8 +403,8 @@ The first FCCSW application generates root file from the configuration file [gea
 The second FCCSW application reads the generated root file **output_ecalSim_e50GeV_1events.root** and do the reconstruction following the configuration file : [runEcalReconstructionWithoutNoise](https://github.com/HEP-FCC/FCCSW/blob/master/Reconstruction/RecCalorimeter/tests/options/runEcalReconstructionWithoutNoise.py).
 
 ```
-
 #!/bin/env python
+
 from DIRAC.Core.Base import Script
 Script.parseCommandLine()
 
@@ -428,10 +428,10 @@ job.setOutputSandbox(["*.log","*.root"])
 #1st FCC application
 simulation = FccSw(
     fccConfFile='/build/YOUR_USERNAME/FCC/FCCSW/Reconstruction/RecCalorimeter/tests/options/geant_fullsim_ecal_singleparticles.py',
-    fccSwPath='/build/YOUR_USERNAME/FCC/FCCSW',
+    fccSwPath='/build/YOUR_USERNAME/FCC/FCCSW'
 )
 
-#sim.numberOfEvents = 500
+#simulation.numberOfEvents = 500
 simulation.setOutputFile("output_ecalSim_e50GeV_1events.root")
 
 reconstruction = FccSw(
@@ -486,14 +486,14 @@ Because this application is reading ouput of the previous application, setting t
 
 If you set the parameter **read** to True without getting output of the previous application, it will give input data to **FCCDataSvc** if there are.
 
-Output files are renamed by default in pre-pending the ID of the job, the application's name, application's version and the application's step.
+Some output files are indexed by the application's name, application's version and the application's step.
 
 Here is an exerpt of the output sandbox of a job running the third example :
 
 	FccSw_v0.8.1_Step_1.log
 	FccSw_v0.8.1_Step_2.log
-	output_ecalReco_noNoise_test_FccSw_v0.8.1_2.root
-	output_ecalSim_e50GeV_1events_FccSw_v0.8.1_Step_1.root
+	output_ecalReco_noNoise_test.root
+	output_ecalSim_e50GeV_1events.root
 	...
 
 In these examples, FCCSW installation is located at **/build/&lt;YOUR_USERNAME&gt;/FCC**.
@@ -517,6 +517,7 @@ Then here is the precedent example using this time, the FCCSW installation of CV
 
 ```
 
+#!/bin/env python
 from DIRAC.Core.Base import Script
 Script.parseCommandLine()
 
@@ -542,7 +543,7 @@ job.setOutputSandbox(["*.log","*.root"])
 #1st FCC application
 simulation = FccSw(
     fccConfFile='/build/YOUR_USERNAME/FCC/FCCSW/Reconstruction/RecCalorimeter/tests/options/geant_fullsim_ecal_singleparticles.py',
-    fccSwPath='/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt',
+    fccSwPath='/cvmfs/fcc.cern.ch/sw/0.8.1/fccsw/0.8.1/x86_64-slc6-gcc62-opt'
 )
 
 #sim.numberOfEvents = 500
@@ -599,27 +600,23 @@ If for some reasons these applications are not convenient for you, you can alway
 
 **WARNING**
 
-Applications are getting FCCSW environment by asking this configuration file :
+The path of the FCC environment script read by FCC Applications is stored on the DIRAC configuration file **dirac.cfg**.
 
-- /path/to/DIRAC_INSTALLATION/etc/dirac.cfg
+This configuration file is located on the DIRAC server and also on the client (for local DIRAC installations).
 
 It contains sections where the path of the environment script is hardcoded.
 
-Each application is looking for this file for setting the environment and FCC applications use by default the release **v0.8.1**.
+Normally this path point to the environment script of the last release of FCCSW which is **v0.8.1** when this tutorial has been written.
 
-If your are using CVMFS/AFS DIRAC installation, it contains already the default path of the FCCSW environment script :
+Then each FCC application is looking for this file for setting the FCC environment before being executed.
 
-	/cvmfs/fcc.cern.ch/sw/0.8.1/init_fcc_stack.sh
+Because this path is hardcoded, for each new release, the release manager has to update **dirac.cfg** file of the server by contacting CLIC group.
 
-If your are not using CVMFS/AFS DIRAC installation, then ensure that **dirac.cfg** file contains the path of the FCCSW environment script else applications won't run.
+But as a user you do not have to take care about this except that you have to set the version of the application (if you do not want to use by default the FCC environment relative to **v0.8.1** release).
 
-For each new release, the release manager has to update **dirac.cfg** file of the CVMFS/AFS DIRAC installation by contacting CLIC group.
+So if the current release of FCC software is different from the default, release manager should have updated **dirac.cfg** of the server.
 
-And you have to set the version of the application (if you do not want to use by default the version **v0.8.1**)
-
-So if the current release of FCC software is different from the default, release manager should have updated **dirac.cfg** of CVMFS/AFS DIRAC installation.
-
-Here is an excerpt of the **dirac.cfg** file :
+Here is an excerpt of the current **dirac.cfg** file :
 
 
 ```
@@ -655,25 +652,9 @@ Operations
 
 ```
 
-Then, if you want to run FCC software with the last release (or a specific one), which is different from the default, you have to ensure that **dirac.cfg** is updated with this release and
+Then, if you want to run FCC software with the last release, which is different from the default, **dirac.cfg** should have been updated with the last release.
 
-**YOU HAVE ALSO TO SET THE VERSION OF THE APPLICATION LIKE THIS :**
-
-	application.setVersion("vX.X.X")
-
-else FCC software will run by default with the release **v0.8.1** !
-
-Do not take care of the default application's platform here **x86_64-slc5-gcc43-opt** because software will be taken from CVMFS with the platform specified in the FCC environment script.
-
-But if you want to change this value, 
-
-**YOU HAVE ALSO TO SET THE PLATFORM OF THE JOB LIKE THIS :**
-
-	job.setPatform("architecture-OS-compiler-type")
-
-You should not change this because ILCDirac supports a pre-defined set of platforms !
-
-Suppose you want to update the **dirac.cgf** file with the release **v0.9.1** :
+If for example, the last release is **v0.9.1**, there should be a new section (the last one) keeping the old one to ensure backward compatibility :
 
       v0.8.1
       {
@@ -687,7 +668,23 @@ Suppose you want to update the **dirac.cgf** file with the release **v0.9.1** :
           CVMFSPath = /cvmfs/fcc.cern.ch/sw/0.9.1
       }
 
-You should add a new section (the last one) keeping the old one to ensure backward compatibility.
+And as a user
+
+**YOU HAVE ALSO TO SET THE VERSION OF THE APPLICATION LIKE THIS :**
+
+	application.setVersion("vX.X.X")
+
+else FCC software will run by default with the release **v0.8.1** !
+
+Do not take care of the default application's platform here **x86_64-slc5-gcc43-opt** because software will be taken from CVMFS with the platform specified in the FCC environment script.
+
+But if someone changed this platform by a new one (e.g. architecture-OS-compiler-type),
+
+**YOU HAVE ALSO TO SET THE PLATFORM OF THE JOB LIKE THIS :**
+
+	job.setPatform("architecture-OS-compiler-type")
+
+In principle, you should not change this value because ILCDirac supports a pre-defined set of platforms !
 
 ILCDirac contains tests for all existing applications.
 
@@ -1032,30 +1029,19 @@ And you have also to update the FCCSW installation path if you want to use an ot
 
 #### FccSw local problem
 
-Contrary to the CVMFS FCCSW installation, when using local FCCSW installation, FccSw application does not call FCCSW/run script but execute the following hardcoded command :
+Contrary to the CVMFS FCCSW installation, when using local FCCSW installation, FccSw application does not call FCCSW/run script but execute the command inside and if the reading of the command failed, it executes by default the following hardcoded command :
 
 ```
 exec /cvmfs/sft.cern.ch/lcg/views/LCG_88/x86_64-slc6-gcc62-opt/bin/python /cvmfs/fcc.cern.ch/sw/0.8.1/gaudi/v28r2/x86_64-slc6-gcc62-opt/scripts/xenv --xml InstallArea/FCCSW.xenv gaudirun.py some_configuration_file.py
 ```
 
-It is similar to the command called by FCCSW/run :
+which is similar to the command called by FCCSW/run :
 
 	run_cmd=$(dirname $0)/build.$BINARY_TAG/run
 
-Except that we use a **.xenv** file not relative to the local FCCSW installation which is not present on the GRID.
+Except that it uses the **.xenv** file of InstallArea folder instead of the once of the build.$BINARY_TAG/config folder.
 
-However this command is still specific to release **0.8.1** so it may not work with the other releases.
-
-To fix this, someone has to export new environment variables into the FCC environment script :
-
-	export XENV=/cvmfs/xenv
-	export PYTHON_BIN=/cvmfs/python
-
-And the new command (check lines 533 and 535 of Fcc.py) executed by FccSw application could be :
-
-	exec $PYTHON_BIN $XENV --xml InstallArea/FCCSW.xenv gaudirun.py some_configuration_file.py
-
-Then FccSw will be able to execute every release of local FCCSW installation.
+Remember that the default FCC environment is relative to **0.8.1** release of FCCSW, then if the release of your local installation is different, you have to ensure that this release is updated into the **dirac.cfg** file and you have to ensure that you set the version of the application !
 
 Adding FCC applications implied to update module's namespace :
 
