@@ -272,9 +272,9 @@ If you encounter some problems during the installation (e.g. ImportError: No mod
 ## 4 - Examples
 
 
-Let's go step by step with 2 examples.
+Let's go step by step with some examples.
 
-With the 2 following examples, the user has to consider that there exist a **UserJob** (inheriting from DIRAC Job) that may contain one or several applications.
+With the following examples, the user has to consider that there exist a **UserJob** (inheriting from DIRAC Job) that may contain one or several applications.
 
 Before using ILCDirac, ensure that you set the environment and updated the proxy (if it is outdated, after 24h ) !
 
@@ -474,7 +474,7 @@ Then the name of the output file of the FCC application has to be specified in i
 
 It has to be the same as the output file name you specify in **setOutputFile()** method !
 
-For the moment, **setOutputFile()** method is only used for using the dependancy.
+For the moment, **setOutputFile()** method is only used for the dependancy.
 
 It is not possible to specify list for these methods then dependancy with many input/output files does not work when this tutorial has been written.
 
@@ -500,7 +500,7 @@ In these examples, FCCSW installation is located at **/build/&lt;YOUR_USERNAME&g
 
 Change it to make it point to your local FCCSW location.
 
-If you encounter some problems in the execution of FCCSW in the grid with your local installation of FCCSW, please take a look at the [FccSw local problem](#fccsw-local-problem)
+If you encounter some problems in the execution of the FccSw application on the grid using your local installation of FCCSW, please take a look at the [FccSw local problem](#fccsw-local-problem)
 
 You can also use FCCSW installation of CVMFS (this is the fccSwPath):
 
@@ -567,7 +567,7 @@ print job.submit(ILC,mode='wms')
 
 ```
 
-If you encounter some problems in the execution of FCCSW in the grid with the CVMFS installation of FCCSW, please take this into account :
+If you encounter some problems in the execution of the FccSw application on the grid using the CVMFS installation of FCCSW, please take this into account :
 
 This tutorial has been written during **v0.8.1** release.
 
@@ -672,7 +672,7 @@ And as a user
 
 **YOU HAVE ALSO TO SET THE VERSION OF THE APPLICATION LIKE THIS :**
 
-	application.setVersion("vX.X.X")
+	application.setVersion("v0.9.1")
 
 else FCC software will run by default with the release **v0.8.1** !
 
@@ -712,7 +712,7 @@ and
 	    fccanalysis.setVersion("v0.9.1")
 	    ...
 
-[Test_FullCVMFSTests.py](Test_FullCVMFSTests.py)
+[Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
 
 in updating the path of FCCSW CVMFS installation :
 
@@ -973,29 +973,29 @@ The DIRAC instance of ILC called ILCDirac is available on gitlab :
 
 FCC software in ILCDirac consists of 2 modules :
 
-[Fcc.py](Fcc.py)
+[Fcc.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Applications/Fcc.py)
 
-[FccAnalysis.py](FccAnalysis.py)
+[FccAnalysis.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Workflow/Modules/FccAnalysis.py)
 
 and their corresponding tests :
 
-[Test_Fcc.py](Test_Fcc.py)
+[Test_Fcc.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_Fcc.py)
 
-[Test_FccAnalysis.py](Test_FccAnalysis.py)
+[Test_FccAnalysis.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Workflow/Modules/Test/Test_FccAnalysis.py)
 
 Adding splitting stuff implied to update user job of ILCDirac :
 
-[UserJob.py](UserJob.py)
+[UserJob.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/UserJob.py)
 
 and its corresponding test :
 
-[Test_UserJob.py](Test_UserJob.py)
+[Test_UserJob.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_UserJob.py)
 
 Adding FCC applications implied to update modules testing all existing applications inside a job :
 
-[LocalTestObjects.py](LocalTestObjects.py)
+[LocalTestObjects.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/LocalTestObjects.py)
 
-[Test_FullCVMFSTests.py](Test_FullCVMFSTests.py)
+[Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
 
 And for these job tests, we uploaded the following files to make the applications run :
 
@@ -1011,7 +1011,7 @@ For FccSw :
 
 FccSw job test needs Detector folder which is not present on the release **v0.8.1**, so it will not run, that's why we commented this test.
 
-Then, from the next release (containing the missing folders), you have to uncomment this method (of the module [Test_FullCVMFSTests.py](Test_FullCVMFSTests.py) Line 308 to Line 315) :
+Then, from the next release (containing the missing folders), you have to uncomment this method (of the module [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py) Line 308 to Line 315) :
 
 ```
 # TO UNCOMMENT when Detector folder of FCCSW will be on CVMFS
@@ -1043,10 +1043,10 @@ which is similar to the command called by FCCSW/run :
 
 Except that it uses the **.xenv** file of InstallArea folder instead of the once of the build.$BINARY_TAG/config folder.
 
-Remember that the default FCC environment is relative to **0.8.1** release of FCCSW, then if the release of your local installation is different, you have to ensure that this release is updated into the **dirac.cfg** file and you have to ensure that you set the version of the application !
+Remember that the default FCC environment is relative to **0.8.1** release of FCCSW, then if the release of your local installation is different, you have to ensure that this release is updated into the **dirac.cfg** file and you have to ensure that you set the right version of the application !
 
 Adding FCC applications implied to update module's namespace :
 
-[__init__.py](__init__.py)
+[__init__.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Applications/__init__.py)
 
 For any questions or any further informations, please contact us at : fcc-experiments-sw-devATSPAMNOTcern.ch
