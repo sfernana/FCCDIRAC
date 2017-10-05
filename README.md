@@ -516,8 +516,8 @@ Then here is the precedent example using this time, the FCCSW installation of CV
 
 
 ```
-
 #!/bin/env python
+
 from DIRAC.Core.Base import Script
 Script.parseCommandLine()
 
