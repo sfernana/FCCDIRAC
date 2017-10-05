@@ -368,13 +368,14 @@ job.setPlatform('x86_64-slc5-gcc43-opt')
 # e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
 job.setLogLevel('DEBUG')
 
-job.setOutputSandbox(["*.log","*.root","*.sh","*.py"])
+job.setOutputSandbox(["*.log","*.root","*.sh","*.py","*.txt"])
 
 #1st FCC application
 FCC_PHYSICS1 = FccAnalysis(
     fccConfFile='/cvmfs/fcc.cern.ch/sw/0.8.1/fcc-physics/0.2.1/x86_64-slc6-gcc62-opt/share/ee_ZH_Zmumu_Hbb.txt'
 )
 
+FCC_PHYSICS1.numberOfEvents = 1000
 FCC_PHYSICS1.setOutputFile("ee_ZH_Zmumu_Hbb.root")
 
 #2nd FCC application
