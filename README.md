@@ -315,7 +315,7 @@ job.setPlatform('x86_64-slc5-gcc43-opt')
 # e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
 job.setLogLevel('DEBUG')
 
-job.setOutputSandbox(["*.log","*.root"])
+job.setOutputSandbox(["*.log","*.root","*.sh","*.py"])
 
 #1st FCC application
 FCC_SW = FccSw(
@@ -368,7 +368,7 @@ job.setPlatform('x86_64-slc5-gcc43-opt')
 # e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
 job.setLogLevel('DEBUG')
 
-job.setOutputSandbox(["*.log","*.root"])
+job.setOutputSandbox(["*.log","*.root","*.sh","*.py"])
 
 #1st FCC application
 FCC_PHYSICS1 = FccAnalysis(
@@ -423,7 +423,7 @@ job.setPlatform('x86_64-slc5-gcc43-opt')
 # e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
 job.setLogLevel('DEBUG')
 
-job.setOutputSandbox(["*.log","*.root"])
+job.setOutputSandbox(["*.log","*.root","*.sh","*.py"])
 
 #1st FCC application
 simulation = FccSw(
@@ -538,7 +538,7 @@ job.setLogLevel('DEBUG')
 
 job.setInputSandbox("/build/YOUR_USERNAME/FCC/FCCSW/Detector")
 
-job.setOutputSandbox(["*.log","*.root"])
+job.setOutputSandbox(["*.log","*.root","*.sh","*.py"])
 
 #1st FCC application
 simulation = FccSw(
