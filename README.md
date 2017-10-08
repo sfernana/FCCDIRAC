@@ -243,7 +243,7 @@ source bashrc
 #source cshrc
 
 #22) set ILCDirac environment from the AFS/CVMFS client
-#source /afs/cern.ch/eng/clic/software/DIRAC/bashrc
+#source /cvmfs/clicdp.cern.ch/DIRAC/bashrc
 
 #3) set GRID user proxy
 # conversion of the grid certificate from p12 to PEM files
@@ -279,7 +279,7 @@ With the following examples, the user has to consider that there exist a **UserJ
 Before using ILCDirac, ensure that you set the environment and updated the proxy (if it is outdated, after 24h ) !
 
 	# each time you open a new shell
-	source /afs/cern.ch/eng/clic/software/DIRAC/bashrc
+	source /cvmfs/clicdp.cern.ch/DIRAC/bashrc
 	# each day
 	dirac-proxy-init
 
