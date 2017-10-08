@@ -713,7 +713,7 @@ and
 	    fccanalysis.setVersion("v0.9.1")
 	    ...
 
-[Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
+[Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
 
 in updating the path of FCCSW CVMFS installation :
 
@@ -974,45 +974,45 @@ The DIRAC instance of ILC called ILCDirac is available on gitlab :
 
 FCC software in ILCDirac consists of 2 modules :
 
-[Fcc.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Applications/Fcc.py)
+[Fcc.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Interfaces/API/NewInterface/Applications/Fcc.py)
 
-[FccAnalysis.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Workflow/Modules/FccAnalysis.py)
+[FccAnalysis.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Workflow/Modules/FccAnalysis.py)
 
 and their corresponding tests :
 
-[Test_Fcc.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_Fcc.py)
+[Test_Fcc.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Interfaces/API/NewInterface/Tests/Test_Fcc.py)
 
-[Test_FccAnalysis.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Workflow/Modules/Test/Test_FccAnalysis.py)
+[Test_FccAnalysis.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Workflow/Modules/Test/Test_FccAnalysis.py)
 
 Adding splitting stuff implied to update user job of ILCDirac :
 
-[UserJob.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/UserJob.py)
+[UserJob.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Interfaces/API/NewInterface/UserJob.py)
 
 and its corresponding test :
 
-[Test_UserJob.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_UserJob.py)
+[Test_UserJob.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Interfaces/API/NewInterface/Tests/Test_UserJob.py)
 
 Adding FCC applications implied to update modules testing all existing applications inside a job :
 
-[LocalTestObjects.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/LocalTestObjects.py)
+[LocalTestObjects.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Interfaces/API/NewInterface/Tests/LocalTestObjects.py)
 
-[Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
+[Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py)
 
 And for these job tests, we uploaded the following files to make the applications run :
 
 For FccAnalysis :
 
-[ee_ZH_Zmumu_Hbb.txt](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v26r0/Testfiles/ee_ZH_Zmumu_Hbb.txt)
+[ee_ZH_Zmumu_Hbb.txt](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v27r0/Testfiles/ee_ZH_Zmumu_Hbb.txt)
 
 For FccSw :
 
-[geant_fastsim.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v26r0/Testfiles/geant_fastsim.py)
+[geant_fastsim.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/tree/Rel-v27r0/Testfiles/geant_fastsim.py)
 
 **IMPORTANT**
 
 FccSw job test needs Detector folder which is not present on the release **v0.8.1**, so it will not run, that's why we commented this test.
 
-Then, from the next release (containing the missing folders), you have to uncomment this method (of the module [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py) Line 308 to Line 315) :
+Then, from the next release (containing the missing folders), you have to uncomment this method (of the module [Test_FullCVMFSTests.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Interfaces/API/NewInterface/Tests/Test_FullCVMFSTests.py) Line 308 to Line 315) :
 
 ```
 # TO UNCOMMENT when Detector folder of FCCSW will be on CVMFS
@@ -1048,6 +1048,6 @@ Remember that the default FCC environment is relative to **0.8.1** release of FC
 
 Adding FCC applications implied to update module's namespace :
 
-[__init__.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v26r0/Interfaces/API/NewInterface/Applications/__init__.py)
+[__init__.py](https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/blob/Rel-v27r0/Interfaces/API/NewInterface/Applications/__init__.py)
 
 For any questions or any further informations, please contact us at : fcc-experiments-sw-devATSPAMNOTcern.ch
