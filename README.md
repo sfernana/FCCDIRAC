@@ -418,7 +418,7 @@ ILC = DiracILC()
 # job settings for a user job
 job = UserJob()
 job.setJobGroup("FCC")
-job.setName("FccAnalysis Chain")
+job.setName("FccSw Chain")
 job.setDestination('LCG.CERN.ch')
 job.setPlatform('x86_64-slc5-gcc43-opt')
 # e.g. ALWAYS, INFO, VERBOSE, WARN, DEBUG
